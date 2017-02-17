@@ -1,0 +1,25 @@
+<div ng-controller="RecipeCtrl">
+
+  <div style="height:40px"></div>
+  <p>Name: {{recipe.name}}</p>
+  <p>Author: {{recipe.author}}</p>
+  <p>Description: {{recipe.description}}</p>
+  <p>Cost: {{recipe.cost}}</p>
+  <p>Nicotine: {{recipe.nicotine}}</p>
+  <p>PG: {{recipe.pg}}</p>
+  <p>VG: {{recipe.vg}}</p>
+
+  <p>Flavors:</p>
+  <ul ng-repeat="flavor in recipe.flavors">
+    <li>{{flavor.name}}</li>
+  </ul>
+
+  <p>Tags:</p>
+  <ul ng-repeat="tag in recipe.tags">
+    <li>{{tag}}</li>
+  </ul>
+
+  <p>Views: {{recipe.views}}</p>
+  <p>Likes: {{recipe.likes}}</p>
+  <p>Dislikes: {{recipe.dislikes}}</p>
+</div>

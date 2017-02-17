@@ -1,0 +1,130 @@
+<div ng-controller="CreationCtrl">
+  <h1>New Recipe</h1>
+
+  <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
+    <fieldset>
+
+      <div class="form-group">
+        <label for="name" class="control-label">Name</label>
+        <input type="text" required class="form-control" name="name" placeholder="Name" id="name" ng-model="newRecipe.name">
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="control-label">Description</label>
+        <input type="text" required class="form-control" id="description" name="description" placeholder="Description" ng-model="newRecipe.description">
+      </div>
+
+      <div class="form-group">
+        <label for="cost" class="control-label">Cost</label>
+        <div class="row">
+          <div class="col-xs-3">
+            <select class="form-control" id="sel1" ng-model="newRecipe.currency">
+              <option>USD</option>
+            </select>
+          </div>
+          <div class="col-xs-9">
+            <input type="text" required class="form-control" id="cost" name="cost" placeholder="Cost" ng-model="newRecipe.cost">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nicotine" class="control-label">Nicotine</label>
+        <div class="row">
+          <div class="col-xs-4">
+            <input type="text" required class="form-control" placeholder="Milliliters" ng-model="newRecipe.nicotine.ml">
+          </div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder="Grams" ng-model="newRecipe.nicotine.grams">
+          </div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder="Percent" ng-model="newRecipe.nicotine.percent">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pg" class="control-label">Propylene Glycol (PG)</label>
+        <div class="row">
+          <div class="col-xs-4">
+            <input type="text" required class="form-control" placeholder="Milliliters" ng-model="newRecipe.pg.ml">
+          </div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder="Grams" ng-model="newRecipe.pg.grams">
+          </div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder="Percent" ng-model="newRecipe.pg.percent">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vg" class="control-label">Vegetable Glycerin (VG)</label>
+        <div class="row">
+          <div class="col-xs-4">
+            <input type="text" required class="form-control" placeholder="Milliliters" ng-model="newRecipe.vg.ml">
+          </div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder="Grams" ng-model="newRecipe.vg.grams">
+          </div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder="Percent" ng-model="newRecipe.vg.percent">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputPassword" class="control-label">Flavors</label>
+        <div ng-repeat="flavor in newRecipe.flavors">
+          <div class="row form-group">
+              <div class="col-xs-1">
+                <a class="btn btn-danger" ng-click="removeFlavorLine($index)" ng-hide="$first">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </a>
+              </div>
+              <div class="col-xs-5">
+                <input type="text" ng-model="flavor.name" placeholder="Name" uib-typeahead="flavor as flavor.name for flavor in search($viewValue)" typeahead-on-select="flavorSelected($item,$index)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
+              </div>
+              <div class="col-xs-2">
+                <input type="text" required class="form-control" placeholder="Milliliters" ng-model="flavor.ml">
+              </div>
+              <div class="col-xs-2">
+                <input type="text" required class="form-control" placeholder="Grams" ng-model="flavor.grams">
+              </div>
+              <div class="col-xs-2">
+                <input type="text" required class="form-control" placeholder="Percent" ng-model="flavor.percent">
+              </div>
+          </div>
+        </div>
+        <a class="btn btn-primary" ng-click="addFlavorLine()">
+          Add Flavor
+        </a>
+      </div>
+
+      <div class="form-group">
+        <label for="tags" class="control-label">Tags</label>
+        <div class="row">
+          <div class="col-xs-10">
+            <input type="text" class="form-control" name="tags" placeholder="Tag" id="tags" ng-model="tag_value" ng-keypress="($event.charCode==13)? addTag() : return">
+          </div>
+          <div class="col-xs-2">
+            <button type="button" class="btn btn-primary" ng-click="addTag()">Add Tag</button>
+          </div>
+        </div>
+        <div class="tag-container">
+            <div ng-repeat="tag in newRecipe.tags" class="chip">
+              {{tag}}
+              <span class="closebtn" ng-click="removeTag($index)">&times;</span>
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
+      </div>
+
+
+    </fieldset>
+  </form>
+
+</div>
