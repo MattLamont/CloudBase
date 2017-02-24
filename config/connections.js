@@ -40,6 +40,7 @@ module.exports.connections = {
   * Run: npm install sails-mysql                                             *
   *                                                                          *
   ***************************************************************************/
+  /*
   MysqlServer: {
     adapter: 'sails-mysql',
     host: 'localhost',
@@ -47,7 +48,7 @@ module.exports.connections = {
     password: 'cloudbase',
     database: 'mysqldb'
   },
-
+*/
   /***************************************************************************
   *                                                                          *
   * MongoDB is the leading NoSQL database.                                   *
@@ -56,13 +57,14 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
+  /*
   MongoDb: {
     adapter: 'sails-mongo',
     host: 'localhost', // defaults to `localhost` if omitted
     port: 27017, // defaults to 27017 if omitted
     database: 'CloudBaseDB' // or omit if not relevant
   },
-
+*/
   /***************************************************************************
   *                                                                          *
   * PostgreSQL is another officially supported relational database.          *

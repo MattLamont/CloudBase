@@ -1,4 +1,4 @@
-angular.module( 'sailng.recipe', ['ui.bootstrap'])
+angular.module( 'sailng.recipe', ['ngMaterial'])
 
 .config(function config( $stateProvider ) {
 	$stateProvider.state( 'recipe', {

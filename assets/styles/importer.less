@@ -42,13 +42,35 @@
  * project should be imported as the rest are just wasting space.
  */
 
-@import '../bower_components/bootstrap/less/bootstrap.less';
-@import '../bower_components/bootswatch/darkly/variables.less';
-@import '../bower_components/bootswatch/darkly/bootswatch.less';
+
+@import (less) '../bower_components/angular-material/angular-material.css';
+
+@light-grey: #3e464c;
+@dark-grey: #363f45;
 
 body {
-  padding-top: 50px;
+  //padding-top: 50px;
+  //background-color: @light-grey;
 }
+
+.login-container{
+  background-image: url("../images/login_background.jpg");
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.login-subheader {
+  background-color: #3F51B5;
+  color: white;
+  text-align: center;
+}
+
+.navbar{
+    background-color: @dark-grey;
+    color: white;
+    min-width: 100%;
+}
+
 
 #current-user-dropdown {
     margin-top: 10px;

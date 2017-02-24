@@ -1,4 +1,4 @@
-angular.module( 'sailng.creation', ['ui.bootstrap'])
+angular.module( 'sailng.creation', ['ngMaterial'])
 
 .config(function config( $stateProvider ) {
 	$stateProvider.state( 'creation', {
@@ -105,6 +105,8 @@ angular.module( 'sailng.creation', ['ui.bootstrap'])
 	$scope.flavorSelected = function( item , index ){
 		$scope.newRecipe.flavors[index].id = item.id;
 		$scope.newRecipe.flavors[index].name = item.name;
-	}
+	};
+
+	$scope.currencies = ('USD GBP').split(' ').map(function (currency) { return { name: currency }; });
 
 });
