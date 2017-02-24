@@ -24,6 +24,8 @@ module.exports = function notFound (data, options) {
   var res = this.res;
   var sails = req._sails;
 
+  sails.log.error( "404 not found: " );
+  sails.log.error( req.url );
   // Set status code
   res.status(404);
 
@@ -79,4 +81,3 @@ module.exports = function notFound (data, options) {
   });
 
 };
-

@@ -3,7 +3,7 @@ angular.module( 'sailng.recent', [
 
 .config(function config( $stateProvider ) {
 	$stateProvider.state( 'recent', {
-		url: '/recipe',
+		url: '/recent',
 		views: {
 			"main": {
 				controller: 'RecentCtrl',
