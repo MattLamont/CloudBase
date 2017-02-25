@@ -13,9 +13,6 @@
  * always omit, customize, or replace this behavior with SASS, SCSS,
  * or any other Grunt tasks you like.)
  */
-
-
-
 // For example:
 //
 // @import 'variables/colors.less';
@@ -28,23 +25,16 @@
 // @import 'pages/signup.less';
 //
 // etc.
-
-
 /**
  * This is the main application stylesheet. It should include or import all
  * stylesheets used throughout the application as this is the only stylesheet in
  * the Grunt configuration that is automatically processed.
  */
-
-
 /**
  * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
  * project should be imported as the rest are just wasting space.
  */
-
-
 @import (less) '../bower_components/angular-material/angular-material.css';
-
 @light-grey: #3e464c;
 @dark-grey: #363f45;
 
@@ -53,7 +43,7 @@ body {
   //background-color: @light-grey;
 }
 
-.login-container{
+.login-container {
   background-image: url("../images/login_background.jpg");
   min-width: 100%;
   min-height: 100%;
@@ -65,41 +55,32 @@ body {
   text-align: center;
 }
 
-.navbar{
-    background-color: @dark-grey;
-    color: white;
-    min-width: 100%;
+.navbar {
+  background-color: @dark-grey;
+  color: white;
+  min-width: 100%;
 }
 
-
-#current-user-dropdown {
-    margin-top: 10px;
+.autocomplete-custom-template li {
+  border-bottom: 1px solid #ccc;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  white-space: normal;
 }
 
-.tag-container{
-  margin: 5px 5px 5px 0px;
+.autocomplete-custom-template li:last-child {
+  border-bottom-width: 0;
 }
 
-.chip {
-    display: inline-block;
-    padding: 0 25px;
-    line-height: 40px;
-    border-radius: 15px;
-    background-color: blue;
+.autocomplete-custom-template .item-metadata,
+.autocomplete-custom-template .item-title {
+  display: block;
+  line-height: 2;
 }
 
-.closebtn {
-    padding-left: 10px;
-    color: #888;
-    font-weight: bold;
-    float: right;
-    font-size: 20px;
-    cursor: pointer;
+.autocomplete-custom-template .item-title md-icon {
+  height: 18px;
+  width: 18px;
 }
-
-.closebtn:hover {
-    color: #000;
-}
-
-
 // @import '../src/app/home/index.less';

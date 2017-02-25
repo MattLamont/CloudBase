@@ -1,112 +1,98 @@
-angular.module( 'sailng.creation', ['ngMaterial'])
+angular.module('sailng.creation', ['ngMaterial'])
 
-.config(function config( $stateProvider ) {
-	$stateProvider.state( 'creation', {
-		url: '/creation',
-		views: {
-			"main": {
-				controller: 'CreationCtrl',
-				templateUrl: 'creation/creation.tpl.html'
-			}
-		}
-	});
-})
-
-.controller( 'CreationCtrl', function CreationController( $scope, $sailsSocket, $window , config, titleService, RecipeModel , FlavorModel ) {
-
-	$scope.newRecipe = {
-												"name":"",
-												"description":"",
-												"cost":"",
-												"currency":"",
-												"flavors":[{
-													"name":"",
-													"ml":"",
-													"grams":"",
-													"percentage":""
-												}],
-												"tags":[],
-												"nicotine":{
-													"ml":"",
-													"grams":"",
-													"percent":""
-												},
-												"pg":{
-													"ml":"",
-													"grams":"",
-													"percent":""
-												},
-												"vg":{
-													"ml":"",
-													"grams":"",
-													"percent":""
-												}
-											};
-
-	$scope.currentUser = config.currentUser;
-	$scope.tag_value = "";
-
-	$scope.createRecipe = function() {
-
-		$scope.newRecipe.author = $scope.currentUser.username;
-
-		RecipeModel.create( $scope.newRecipe ).then( function( model ){
-			console.log( model );
-			$window.location.href = '/recipe/' + model.results.id;
-		});
-
-	};
-
-	$scope.search = function( search_value ) {
-
-		return FlavorModel.search( search_value ).then(function(response){
-			return response.results;
+  .config(function config($stateProvider) {
+    $stateProvider.state('creation', {
+      url: '/creation',
+      views: {
+        "main": {
+          controller: 'CreationCtrl',
+          templateUrl: 'creation/creation.tpl.html'
+        }
+      }
     });
-	};
+  })
 
-	$scope.addFlavorLine = function(){
+  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel) {
 
-		$scope.newRecipe.flavors.push( {
-			"name":"",
-			"id":"",
-			"ml":"",
-			"grams":"",
-			"percent":""
-		});
-	};
+    $scope.newRecipe = {
+      "name": "",
+      "description": "",
+      "cost": "",
+      "currency": "",
+      "flavors": [{
+        "name": "",
+        "ml": "",
+        "grams": "",
+        "percentage": ""
+      }],
+      "tags": [],
+      "nicotine": {
+        "ml": "",
+        "grams": "",
+        "percent": ""
+      },
+      "pg": {
+        "ml": "",
+        "grams": "",
+        "percent": ""
+      },
+      "vg": {
+        "ml": "",
+        "grams": "",
+        "percent": ""
+      }
+    };
 
-	$scope.removeFlavorLine = function( index ){
+    $scope.currentUser = config.currentUser;
 
-		$scope.newRecipe.flavors.splice( index , 1 );
-	};
+    $scope.searchText = "";
 
-	$scope.addTag = function(){
-		if( $scope.tag_value.length < 2 ){
-			return;
-		}
+    $scope.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
-		function checkDuplicate( tag ){
-			return tag === $scope.tag_value;
-		}
+    $scope.querySearch = function(query) {
+      return $http
+        .get('/api/flavor/search/?q=' + query)
+        .then(function(data) {
+          return data.data.results;
+        });
+    };
 
-		if( $scope.newRecipe.tags.find( checkDuplicate ) ){
-			$scope.tag_value = "";
-			return;
-		}
+    $scope.selectedFlavorChange = function(item, index) {
+      $scope.newRecipe.flavors[index].name = item.name;
+      $scope.newRecipe.flavors[index].id = item.id;
+    };
 
-		$scope.newRecipe.tags.push( $scope.tag_value );
-		$scope.tag_value = "";
-	};
+    $scope.createRecipe = function() {
 
-	$scope.removeTag = function( index ){
-		$scope.newRecipe.tags.splice( index , 1 );
-	};
+      $scope.newRecipe.author = $scope.currentUser.username;
 
-	$scope.flavorSelected = function( item , index ){
-		$scope.newRecipe.flavors[index].id = item.id;
-		$scope.newRecipe.flavors[index].name = item.name;
-	};
+      RecipeModel.create($scope.newRecipe).then(function(model) {
+        console.log(model);
+        $window.location.href = '/recipe/' + model.results.id;
+      });
 
-	$scope.currencies = ('USD GBP').split(' ').map(function (currency) { return { name: currency }; });
+    };
 
-});
+    $scope.addFlavorLine = function() {
+
+      $scope.newRecipe.flavors.push({
+        "name": "",
+        "id": "",
+        "ml": "",
+        "grams": "",
+        "percent": ""
+      });
+    };
+
+    $scope.removeFlavorLine = function(index) {
+
+      $scope.newRecipe.flavors.splice(index, 1);
+    };
+
+    $scope.currencies = ('USD GBP').split(' ').map(function(currency) {
+      return {
+        name: currency
+      };
+    });
+
+  });

@@ -1,6 +1,6 @@
-angular.module( 'sailng.header', ['ngMaterial'])
+angular.module('sailng.header', ['ngMaterial'])
 
-.controller( 'HeaderCtrl', function HeaderController( $scope, $state, $mdSidenav , config ) {
+  .controller('HeaderCtrl', function HeaderController($scope, $state, $mdSidenav, config) {
 
     $scope.currentUser = config.currentUser;
 
@@ -10,5 +10,5 @@ angular.module( 'sailng.header', ['ngMaterial'])
       return function() {
         $mdSidenav(componentId).toggle();
       };
-  };
-});
+    };
+  });

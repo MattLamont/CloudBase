@@ -23,14 +23,14 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  *  If a request to a URL doesn't match any of the custom routes above, it  *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   *  If a request to a URL doesn't match any of the custom routes above, it  *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
 
   'get /': {
     controller: 'HomeController',
@@ -45,20 +45,20 @@ module.exports.routes = {
   'post /auth/local': 'AuthController.callback',
   'post /auth/local/:action': 'AuthController.callback',
 
-    /**
-     * User routes
-     */
-    'get /api/user': 'UserController.getAll',
-    'get /api/user/:id': 'UserController.getOne',
-    'post /api/user': 'UserController.create',
+  /**
+   * User routes
+   */
+  'get /api/user': 'UserController.getAll',
+  'get /api/user/:id': 'UserController.getOne',
+  'post /api/user': 'UserController.create',
 
 
   /* Popular routes */
-    'get /popular': 'PopularController.getAll',
-    'get /popular': 'PopularController.getOne',
-    'post /popular': 'PopularController.create',
-    'delete /popular': 'PopularController.destroy',
-    'put /popular/:id': 'PopularController.update',
+  'get /popular': 'PopularController.getAll',
+  'get /popular': 'PopularController.getOne',
+  'post /popular': 'PopularController.create',
+  'delete /popular': 'PopularController.destroy',
+  'put /popular/:id': 'PopularController.update',
 
   /* Recipe Routes */
   'get /api/recipes': 'RecipeController.getAll',

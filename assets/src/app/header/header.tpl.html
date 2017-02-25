@@ -1,45 +1,43 @@
-
 <div ng-controller="HeaderCtrl">
-    <div layout="row" layout-padding class="navbar" layout-align="space-between center">
+  <div layout="row" layout-padding class="navbar" layout-align="space-between center">
     <div>
-        <md-button href="/home">CloudBase</md-button>
-        <md-button href="/popular">Popular</md-button>
-        <md-button href="/recent">Recent</md-button>
+      <md-button href="/home">CloudBase</md-button>
+      <md-button href="/popular">Popular</md-button>
+      <md-button href="/recent">Recent</md-button>
     </div>
     <div class="nav-buttons" ng-hide="currentUser">
-        <md-button href="/login" class="md-raised md-primary">Log In</md-button>
+      <md-button href="/login" class="md-raised md-primary">Log In</md-button>
     </div>
     <div class="nav-buttons" nf-hide="!currentUser">
-        <md-button class="md-icon-button md-primary" aria-label="Settings">
-            <md-icon md-svg-icon="../../images/icons/ic_menu_white_48px.svg" ng-click="toggleSideNav()"></md-icon>
-        </md-button>
+      <md-button class="md-icon-button md-primary" aria-label="Settings">
+        <md-icon md-svg-icon="../../images/icons/ic_menu_white_48px.svg" ng-click="toggleSideNav()"></md-icon>
+      </md-button>
     </div>
-    </div>
+  </div>
 
-    <!-- Side Nav -->
-    <md-sidenav class="md-sidenav-right" md-component-id="right" md-whiteframe="4">
+  <!-- Side Nav -->
+  <md-sidenav class="md-sidenav-right" md-component-id="right" md-whiteframe="4">
 
-      <md-subheader class="login-subheader">
-        <h1 class="md-toolbar-tools">{{currentUser.username}}</h1>
+    <md-subheader class="login-subheader">
+      <h1 class="md-toolbar-tools">{{currentUser.username}}</h1>
     </md-subheader>
 
-      <md-content layout-margin>
-        <md-list-item ng-click="go('/creation')" class="noright">
-          <md-icon class="md-secondary" ng-click="go('/creation')" md-svg-icon="social:android"></md-icon>
-          <p>Create</p>
-        </md-list-item>
-        <md-list-item ng-click="goToPerson(person.name, $event)" class="noright">
-          <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="social:android"></md-icon>
-          <p>Account</p>
-        </md-list-item>
-        <md-list-item ng-click="goToPerson(person.name, $event)" class="noright">
-          <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="social:android"></md-icon>
-          <p>Logout</p>
-        </md-list-item>
-        <md-button ng-click="toggleSideNav()" class="md-accent">
-          Close this Sidenav
-        </md-button>
-      </md-content>
-
-    </md-sidenav>
+    <md-content layout-margin>
+      <md-list-item ng-click="go('/creation')" class="noright">
+        <md-icon class="md-secondary" ng-click="go('/creation')" md-svg-icon="social:android"></md-icon>
+        <p>Create</p>
+      </md-list-item>
+      <md-list-item ng-click="goToPerson(person.name, $event)" class="noright">
+        <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="social:android"></md-icon>
+        <p>Account</p>
+      </md-list-item>
+      <md-list-item ng-click="goToPerson(person.name, $event)" class="noright">
+        <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="social:android"></md-icon>
+        <p>Logout</p>
+      </md-list-item>
+      <md-button ng-click="toggleSideNav()" class="md-accent">
+        Close this Sidenav
+      </md-button>
+    </md-content>
+  </md-sidenav>
 </div>

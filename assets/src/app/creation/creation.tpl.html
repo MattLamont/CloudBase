@@ -1,73 +1,115 @@
 <div ng-controller="CreationCtrl">
 
-    <div layout="row">
+  <div layout="row">
 
-        <md-content layout-padding flex-offset-gt-sm="15" flex-offset-xs="5" flex-gt-sm="70" flex-xs="90">
-        <md-tabs md-dynamic-height md-border-bottom>
-          <md-tab label="New Recipe">
-            <md-content class="md-padding">
-              <h1 class="md-display-2">New Recipe</h1>
-              <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
+    <md-content layout-padding flex-offset-gt-sm="15" flex-offset-xs="5" flex-gt-sm="70" flex-xs="90">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="New Recipe">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">New Recipe</h1>
+            <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
               <div layout="column">
 
-                  <md-input-container>
-                    <label>Name</label>
-                    <input type="text" required ng-model="newRecipe.name">
-                  </md-input-container>
+                <md-input-container>
+                  <label>Name</label>
+                  <input type="text" required ng-model="newRecipe.name">
+                </md-input-container>
 
-                  <md-input-container>
-                    <label>Description</label>
-                    <input type="text" required ng-model="newRecipe.description">
-                  </md-input-container>
+                <md-input-container>
+                  <label>Description</label>
+                  <input type="text" required ng-model="newRecipe.description">
+                </md-input-container>
 
                 <div layout="row">
-                    <md-input-container flex="30">
-                        <label>Currency</label>
-                        <md-select ng-model="newRecipe.currency">
-                          <md-option><em>None</em></md-option>
-                          <md-option ng-repeat="currency in currencies" ng-value="currency.name">
-                            {{currency.name}}
-                          </md-option>
-                        </md-select>
-                      </md-input-container>
-                      <md-input-container flex="70">
-                        <label>Cost</label>
-                        <input type="text" ng-model="newRecipe.cost">
-                      </md-input-container>
+                  <md-input-container flex="30">
+                    <label>Currency</label>
+                    <md-select ng-model="newRecipe.currency">
+                      <md-option><em>None</em></md-option>
+                      <md-option ng-repeat="currency in currencies" ng-value="currency.name">
+                        {{currency.name | currency}}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                  <md-input-container flex="70">
+                    <label>Cost</label>
+                    <input type="text" ng-model="newRecipe.cost">
+                  </md-input-container>
                 </div>
 
                 <div layout="row" layout-align="space-between center">
-                    <md-input-container>
-                        <label>Nicotine (ml)</label>
-                        <input type="text" required ng-model="newRecipe.nicotine.ml">
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Propylene Glycol (ml)</label>
-                        <input type="text" required ng-model="newRecipe.nicotine.ml">
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Vegetable Glycerin (ml)</label>
-                        <input type="text" required ng-model="newRecipe.nicotine.ml">
-                    </md-input-container>
+                  <md-input-container>
+                    <label>Nicotine (ml)</label>
+                    <input type="text" required ng-model="newRecipe.nicotine.ml">
+                  </md-input-container>
+                  <md-input-container>
+                    <label>Propylene Glycol (ml)</label>
+                    <input type="text" required ng-model="newRecipe.nicotine.ml">
+                  </md-input-container>
+                  <md-input-container>
+                    <label>Vegetable Glycerin (ml)</label>
+                    <input type="text" required ng-model="newRecipe.nicotine.ml">
+                  </md-input-container>
                 </div>
-                </div>
-              </form>
-          </md-tab>
-          <md-tab label="New Flavor">
-            <md-content class="md-padding">
-              <h1 class="md-display-2">Tab Two</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-              <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-              <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-            </md-content>
-          </md-tab>
-        </md-tabs>
-        </md-content>
 
-        <div flex-gt-sm="15" flex-xs="5">
-        </div>
-    </div>
-<!--
+                <div ng-repeat="flavor in newRecipe.flavors">
+                  <div layout="row" layout-align="space-between center">
+                    <md-button class="md-icon-button md-raised md-primary" ng-hide="!$first" ng-click="addFlavorLine()">
+                      <md-icon md-svg-icon="../../images/icons/ic_add_white_48px.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button md-raised md-warn" ng-hide="$index === 0" ng-click="removeFlavorLine($index)">
+                      <md-icon md-svg-icon="../../images/icons/ic_clear_white_48px.svg"></md-icon>
+                    </md-button>
+                    <md-autocomplete flex="60" md-selected-item="selectedFlavor" md-search-text="searchText" md-selected-item-change="selectedFlavorChange( item , $index )" md-items="item in querySearch( searchText )" md-item-text="item.name" md-min-length="2" ng-model="flavor.name"
+                        md-menu-class="autocomplete-custom-template" required md-require-match md-floating-label="Flavor">
+                      <md-item-template>
+                        <span class="item-title">
+                            <md-icon md-svg-icon="../../images/icons/ic_menu_white_48px.svg"></md-icon>
+                            <span><strong>Flavor</strong> {{item.name}}</span>
+                        </span>
+                        <span class="item-metadata">
+                            <span>
+                                <strong>Brand:</strong> {{item.brand}}
+                            </span>
+                        <span>
+                                <strong>Company:</strong> {{item.name}}
+                            </span>
+                        </span>
+                      </md-item-template>
+                    </md-autocomplete>
+
+                    <md-input-container flex="30">
+                      <label>Milliliters</label>
+                      <input type="text" required ng-model="flavor.ml">
+                    </md-input-container>
+                  </div>
+                </div>
+
+                <md-chips ng-model="newRecipe.tags" md-separator-keys="keys" placeholder="Enter a tag" secondary-placeholder="+Tag">
+                </md-chips>
+              </div>
+            </form>
+        </md-tab>
+        <md-tab label="New Flavor">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Two</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
+              felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices
+              ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis,
+              iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+            <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at
+              convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus
+              sapien sit amet, tempus sapien.</p>
+            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante
+              eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+      </md-content>
+
+      <div flex-gt-sm="15" flex-xs="5">
+      </div>
+  </div>
+  <!--
   <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
       <md-content layout="column" layout-margin>
       <md-input-container>
