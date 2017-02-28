@@ -35,7 +35,7 @@ module.exports = {
     },
 
     author: {
-      type: 'string',
+      type: 'json',
       required: true
     },
 
@@ -44,24 +44,44 @@ module.exports = {
       defaultsTo: []
     },
 
-    nicotine: {
-      type:'json',
+    totalVolume: {
+      type: 'integer',
+      required: true
+    }
+
+    targetNicotine: {
+      type: 'json',
+      required: true
+    },
+
+    nicotineStrength: {
+      type: 'integer',
       required: true
     },
 
     pg: {
-      type:'json',
+      type: 'json',
       required: true
     },
 
-    vg:{
-      type:'json',
+    vg: {
+      type: 'json',
       required: true
+    },
+
+    dilutant: {
+      type: 'integer',
+      defaultsTo: 0
     },
 
     flavors: {
       type: 'json',
       required: true
+    },
+
+    additionalInfo: {
+      type: 'string',
+      defaultsTo: ''
     },
 
     views: {
