@@ -10,9 +10,10 @@
             <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;" name="recipeForm">
               <div layout="column">
 
-                <md-input-container>
+                <md-input-container class="md-icon-float">
                   <label>Name</label>
-                  <input type="text" required ng-model="newRecipe.name" name="name" minlength="3" maxlength="50">
+                  <md-icon md-font-library="material-icons">face</md-icon>
+                  <input type="text" required ng-model="newRecipe.name" name="name" minlength="3" maxlength="60">
                   <div ng-messages="recipeForm.name.$error" multiple md-auto-hide="false">
                     <div ng-message="required">
                       You've got to give your beautiful new creation some name!
@@ -21,21 +22,19 @@
                     <div ng-message="minlength">
                       Your juice deserves a name with more than 2 letters...
                     </div>
-
-                    <div ng-message="maxlength">
-                      Lets try to keep that name below 50 characters.
-                    </div>
                   </div>
                 </md-input-container>
 
-                <md-input-container>
+                <md-input-container class="md-icon-float">
                   <label>Description</label>
+                  <md-icon md-font-library="material-icons">description</md-icon>
                   <input type="text" required ng-model="newRecipe.description">
                 </md-input-container>
 
                 <div layout="row">
-                  <md-input-container flex="30">
+                  <md-input-container flex="30" class="md-icon-float">
                     <label>Currency</label>
+                    <md-icon md-font-library="material-icons">attach_money</md-icon>
                     <md-select ng-model="newRecipe.currency">
                       <md-option><em>None</em></md-option>
                       <md-option ng-repeat="currency in currencies" ng-value="currency.name">
@@ -87,8 +86,9 @@
 
                 <div ng-repeat="flavor in newRecipe.flavors">
                   <div layout="row" layout-align="space-between center">
-                    <md-button class="md-icon-button md-raised md-primary" ng-hide="!$first" ng-click="addFlavorLine()">
-                      <md-icon md-svg-icon="../../images/icons/ic_add_white_48px.svg"></md-icon>
+                    <md-button class="md-icon-button" ng-hide="!$first" ng-click="addFlavorLine()">
+                      <md-icon md-font-library="material-icons" class="md-primary">add_circle_outline</md-icon>
+                      <!--<md-icon md-svg-icon="../../images/icons/ic_add_white_48px.svg"></md-icon>-->
                     </md-button>
                     <md-button class="md-icon-button md-raised md-warn" ng-hide="$index === 0" ng-click="removeFlavorLine($index)">
                       <md-icon md-svg-icon="../../images/icons/ic_clear_white_48px.svg"></md-icon>
