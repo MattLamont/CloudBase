@@ -6,37 +6,27 @@
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="New Recipe">
           <md-content class="md-padding">
-            <md-fab-toolbar md-open="fabToolbarOpen" md-direction="left">
-              <md-fab-trigger class="align-with-text">
-                <md-button aria-label="menu" class="md-fab md-primary">
-                  <md-icon md-svg-src="../../images/icons/ic_menu_white_48px.svg"></md-icon>
-                </md-button>
-              </md-fab-trigger>
 
-              <md-toolbar>
-                <md-fab-actions class="md-toolbar-tools">
-                  <md-button ng-click="changeUnitType('Milliliters')">
-                    Milliliters
-                  </md-button>
-                  <md-button ng-click="changeUnitType('Grams')">
-                    Grams
-                  </md-button>
-                  <md-button ng-click="changeUnitType('Percent')">
-                    Percent
-                  </md-button>
-                  <md-button ng-click="changeUnitType('Drops')">
-                    Drops
-                  </md-button>
-                </md-fab-actions>
-              </md-toolbar>
-            </md-fab-toolbar>
-
-            <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
+            <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;" name="recipeForm">
               <div layout="column">
 
                 <md-input-container>
                   <label>Name</label>
-                  <input type="text" required ng-model="newRecipe.name">
+                  <input type="text" required ng-model="newRecipe.name" name="name" minlength="2" maxlength="50">
+                  <!--<div class="hint">What are you going to name this beautiful creation?</div>-->
+                  <div ng-messages="projectForm.name.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">
+                      You've got to charge something! You can't just <b>give away</b> a Missile Defense System.
+                    </div>
+
+                    <div ng-message="min">
+                      You should charge at least $800 an hour. This job is a big deal... if you mess up, everyone dies!
+                    </div>
+
+                    <div ng-message="max">
+                      {{projectForm.rate.$viewValue | currency:"$":0}} an hour? That's a little ridiculous. I doubt even Bill Clinton could afford that.
+                    </div>
+                  </div>
                 </md-input-container>
 
                 <md-input-container>
@@ -64,27 +54,27 @@
                 <div layout="row" layout-align="space-between center">
                   <md-input-container flex="45">
                     <label>Desired Nicotine Strength (mg/ml)</label>
-                    <input type="number" required ng-model="newRecipe.targetNicotine">
+                    <input type="number" required ng-model="newRecipe.targetNicotine" ng-change="updateRecipeValues()">
                   </md-input-container>
                   <md-input-container flex="45">
                     <label>Desired Total Volume (ml)</label>
-                    <input type="number" required ng-model="newRecipe.totalVolume">
+                    <input type="number" required ng-model="newRecipe.totalVolume" ng-change="updateRecipeValues()">
                   </md-input-container>
                 </div>
 
                 <!-- PG + VG + Nicotine amounts -->
                 <div layout="row" layout-align="space-between center">
                   <md-input-container flex="30">
-                    <label>Nicotine ({{currentUnitType}})</label>
-                    <input type="number" required ng-model="newRecipe.nicotine[currentUnitType]">
+                    <label>Nicotine (Percent)</label>
+                    <input type="number" required ng-model="newRecipe.nicotine.percent">
                   </md-input-container>
                   <md-input-container flex="30">
-                    <label>Propylene Glycol ({{currentUnitType}})</label>
-                    <input type="number" required ng-model="newRecipe.pg[currentUnitType]">
+                    <label>Propylene Glycol (Percent)</label>
+                    <input type="number" required ng-model="newRecipe.pg.percent">
                   </md-input-container>
                   <md-input-container flex="30">
-                    <label>Vegetable Glycerin ({{currentUnitType}})</label>
-                    <input type="number" required ng-model="newRecipe.vg[currentUnitType]">
+                    <label>Vegetable Glycerin (Percent)</label>
+                    <input type="number" required ng-model="newRecipe.vg.percent">
                   </md-input-container>
                 </div>
 
@@ -115,8 +105,8 @@
                     </md-autocomplete>
 
                     <md-input-container flex="30">
-                      <label>{{currentUnitType}}</label>
-                      <input type="text" required ng-model="flavor[currentUnitType]">
+                      <label>Percent</label>
+                      <input type="text" required ng-model="flavor.percent">
                     </md-input-container>
                   </div>
                 </div>
@@ -126,6 +116,76 @@
 
               </div>
             </form>
+
+            <md-fab-toolbar md-open="fabToolbarOpen" md-direction="left">
+              <md-fab-trigger class="align-with-text">
+                <md-button aria-label="menu" class="md-fab md-primary">
+                  <md-icon md-svg-src="../../images/icons/ic_menu_white_48px.svg"></md-icon>
+                </md-button>
+              </md-fab-trigger>
+
+              <md-toolbar>
+                <md-fab-actions class="md-toolbar-tools">
+                  <md-button ng-click="changeUnitType('Milliliters')">
+                    Milliliters
+                  </md-button>
+                  <md-button ng-click="changeUnitType('Grams')">
+                    Grams
+                  </md-button>
+                  <md-button ng-click="changeUnitType('Percent')">
+                    Percent
+                  </md-button>
+                  <md-button ng-click="changeUnitType('Drops')">
+                    Drops
+                  </md-button>
+                </md-fab-actions>
+              </md-toolbar>
+            </md-fab-toolbar>
+
+            <section layout="row" layout-align="space-around center">
+              <div flex="45">
+                <md-card md-primary="dark-grey">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Nicotine</span>
+                      <span class="md-subhead">{{newRecipe.nicotine[currentUnitType] || 0}} {{currentUnitType}}</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                </md-card>
+              </div>
+              <div flex="45">
+                <md-card md-primary="dark-grey">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Propylene Glycol (PG)</span>
+                      <span class="md-subhead">{{newRecipe.pg[currentUnitType] || 0}} {{currentUnitType}}</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                </md-card>
+              </div>
+            </section>
+            <section layout="row" layout-align="space-around center">
+              <div flex="45">
+                <md-card md-primary="dark-grey">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Vegetable Glycerin (VG)</span>
+                      <span class="md-subhead">{{newRecipe.vg[currentUnitType] || 0}} {{currentUnitType}}</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                </md-card>
+              </div>
+              <div flex="45">
+                <md-card md-primary="dark-grey">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Nicotine</span>
+                      <span class="md-subhead">{{newRecipe.nicotine[currentUnitType] || 0}} {{currentUnitType}}</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                </md-card>
+              </div>
+            </section>
         </md-tab>
         <md-tab label="New Flavor">
           <md-content class="md-padding">

@@ -1,4 +1,4 @@
-angular.module('sailng.creation', ['ngMaterial'])
+angular.module('sailng.creation', ['ngMaterial' , 'ngMessages'])
 
   .config(function config($stateProvider) {
     $stateProvider.state('creation', {
@@ -27,11 +27,12 @@ angular.module('sailng.creation', ['ngMaterial'])
       }],
       "tags": [],
       "nicotine": {
-        "Milliliters": "",
-        "Grams": "",
-        "Percent": "",
-        "Drops":""
+        "milliliters": null,
+        "grams": null,
+        "percent": null,
+        "drops": null
       },
+      "nicotineStrength":100,
       "pg": {
         "ml": "",
         "grams": "",
@@ -53,6 +54,10 @@ angular.module('sailng.creation', ['ngMaterial'])
     $scope.fabToolbarOpen = false;
 
     $scope.currentUnitType = "Percent";
+
+    $scope.pg_weight = 1.036;
+    $scope.vg_weight = 1.261;
+
 
     $scope.querySearch = function(query) {
       return $http
@@ -102,7 +107,16 @@ angular.module('sailng.creation', ['ngMaterial'])
 
     $scope.changeUnitType = function(type) {
       $scope.currentUnitType = type;
-      $scope.$apply();
+    };
+
+    $scope.updateRecipeValues = function(){
+        console.log( "changing");
+        $scope.newRecipe.nicotine.Grams = ($scope.newRecipe.targetNicotine * $scope.newRecipe.totalVolume) / 1000;
+        $scope.newRecipe.nicotine.Milliliters = $scope.newRecipe.nicotine.Grams / $scope.newRecipe.nicotineStrength;
+        $scope.newRecipe.nicotine.Percent = ($scope.newRecipe.nicotine.Milliliters / $scope.newRecipe.totalVolume) * 100;
+        $scope.newRecipe.nicotine.Drops = Math.round( $scope.newRecipe.nicotine.Milliliters / 0.05 );
+
+        console.log( $scope.newRecipe.nicotine );
     };
 
   });

@@ -8,6 +8,7 @@ angular.module('sailng', [
     'services',
     'models',
     'ngMaterial',
+    'ngMessages',
 
     'sailng.header',
     'sailng.home',
