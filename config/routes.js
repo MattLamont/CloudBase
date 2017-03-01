@@ -70,6 +70,11 @@ module.exports.routes = {
 
 
   /* Flavor Routes */
+  'get /api/flavors': 'FlavorController.getAll',
+  'get /api/flavor/:id': 'FlavorController.getOne',
+  'post /api/flavor': 'FlavorController.create',
+  'delete /api/flavor': 'FlavorController.destroy',
+  'put /api/flavor/:id': 'FlavorController.update',
   'get /api/flavor/search': 'FlavorController.search',
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched

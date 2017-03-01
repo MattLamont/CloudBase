@@ -2,35 +2,41 @@
 
   <div layout="row">
 
-    <md-content layout-padding flex-offset-gt-sm="15" flex-offset-xs="5" flex-gt-sm="70" flex-xs="90">
+    <md-content layout-padding flex-offset-xs="0" flex-offset-gt-sm="25" flex>
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="New Recipe">
-          <md-content class="md-padding">
+          <br>
+          <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;" name="recipeForm">
+            <div layout="column">
 
-            <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;" name="recipeForm">
-              <div layout="column">
+              <md-toolbar>
+                <div class="md-toolbar-tools">Basic Info</div>
+              </md-toolbar>
 
-                <md-input-container class="md-icon-float">
-                  <label>Name</label>
-                  <md-icon md-font-library="material-icons">face</md-icon>
-                  <input type="text" required ng-model="newRecipe.name" name="name" minlength="3" maxlength="60">
-                  <div ng-messages="recipeForm.name.$error" multiple md-auto-hide="false">
-                    <div ng-message="required">
-                      You've got to give your beautiful new creation some name!
-                    </div>
-
-                    <div ng-message="minlength">
-                      Your juice deserves a name with more than 2 letters...
-                    </div>
+              <md-input-container class="md-icon-float">
+                <label>Name</label>
+                <md-icon md-font-library="material-icons" class="md-dark">face</md-icon>
+                <input type="text" required ng-model="newRecipe.name" name="name" minlength="3" maxlength="60">
+                <p class="hint" ng-hide="recipeForm.name.$touched && recipeForm.name.$invalid">Is it a boy or a girl?</p>
+                <div ng-messages="recipeForm.name.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    You've got to give your beautiful new creation some name!
                   </div>
-                </md-input-container>
 
-                <md-input-container class="md-icon-float">
-                  <label>Description</label>
-                  <md-icon md-font-library="material-icons">description</md-icon>
-                  <input type="text" required ng-model="newRecipe.description">
-                </md-input-container>
+                  <div ng-message="minlength">
+                    Your juice deserves a name with more than 2 letters...
+                  </div>
+                </div>
+              </md-input-container>
 
+              <md-input-container class="md-icon-float">
+                <label>Description</label>
+                <md-icon md-font-library="material-icons" class="md-dark">description</md-icon>
+                <input type="text" required name="description" ng-model="newRecipe.description" maxlength="150">
+                <p class="hint" ng-hide="recipeForm.description.$touched && recipeForm.name.$invalid">Don't Worry, there is no minimum word count.</p>
+              </md-input-container>
+
+              <!-- Cost inputs (Removed For Now)
                 <div layout="row">
                   <md-input-container flex="30" class="md-icon-float">
                     <label>Currency</label>
@@ -55,290 +61,255 @@
                     </div>
                   </md-input-container>
                 </div>
+                -->
 
-                <!-- Desired Nicotine amount and total volume -->
-                <div layout="row" layout-align="space-between center">
-                  <md-input-container flex="45">
-                    <label>Desired Nicotine Strength (mg/ml)</label>
-                    <input type="number" required ng-model="newRecipe.targetNicotine" ng-change="updateRecipeValues()">
-                  </md-input-container>
-                  <md-input-container flex="45">
-                    <label>Desired Total Volume (ml)</label>
-                    <input type="number" required ng-model="newRecipe.totalVolume" ng-change="updateRecipeValues()">
-                  </md-input-container>
+              <md-toolbar>
+                <div class="md-toolbar-tools">Mixing Amounts</div>
+              </md-toolbar>
+
+              <md-input-container class="md-icon-float">
+                <label>Volume (ml)</label>
+                <md-icon md-font-library="material-icons" name="volume" class="md-dark">local_drink</md-icon>
+                <input type="number" required ng-model="newRecipe.totalVolume" ng-change="updateRecipeValues()" min="0" max="100000">
+                <p class="hint" ng-hide="recipeForm.volume.$touched && recipeForm.volume.$invalid">What should the final total juice amount be?</p>
+                <div ng-messages="recipeForm.volume.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    We need a total volume for this whole thing to work.
+                  </div>
+                  <div ng-message="max">
+                    Seriously!? Do you really need all that juice?
+                  </div>
+                  <div ng-message="min">
+                    Ummm...lets try using positive numbers.
+                  </div>
                 </div>
+              </md-input-container>
 
-                <!-- PG + VG + Nicotine amounts -->
-                <div layout="row" layout-align="space-between center">
-                  <md-input-container flex="30">
-                    <label>Nicotine (Percent)</label>
-                    <input type="number" required ng-model="newRecipe.nicotine.percent">
-                  </md-input-container>
-                  <md-input-container flex="30">
-                    <label>Propylene Glycol (Percent)</label>
-                    <input type="number" required ng-model="newRecipe.pg.percent">
-                  </md-input-container>
-                  <md-input-container flex="30">
-                    <label>Vegetable Glycerin (Percent)</label>
-                    <input type="number" required ng-model="newRecipe.vg.percent">
-                  </md-input-container>
+              <!-- Desired Nicotine amount and total volume -->
+              <md-input-container class="md-icon-float">
+                <label>Strength (mg/ml)</label>
+                <md-icon md-font-library="material-icons" class="md-dark">fitness_center</md-icon>
+                <input type="number" required name="nicotine" ng-model="newRecipe.targetNicotine" ng-change="updateRecipeValues()" min="0" max="200">
+                <p class="hint" ng-hide="recipeForm.nicotine.$touched && recipeForm.nicotine.$invalid">How strong do you want the juice to be?</p>
+                <div ng-messages="recipeForm.nicotine.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    If you don't want any nicotine in the recipe, just enter "0"
+                  </div>
+                  <div ng-message="max">
+                    I'm no doctor, but I think that might kill you.
+                  </div>
+                  <div ng-message="min">
+                    Ummm...lets try using positive numbers.
+                  </div>
                 </div>
+              </md-input-container>
 
-                <div ng-repeat="flavor in newRecipe.flavors">
-                  <div layout="row" layout-align="space-between center">
-                    <md-button class="md-icon-button" ng-hide="!$first" ng-click="addFlavorLine()">
-                      <md-icon md-font-library="material-icons" class="md-primary">add_circle_outline</md-icon>
-                      <!--<md-icon md-svg-icon="../../images/icons/ic_add_white_48px.svg"></md-icon>-->
-                    </md-button>
-                    <md-button class="md-icon-button md-raised md-warn" ng-hide="$index === 0" ng-click="removeFlavorLine($index)">
-                      <md-icon md-svg-icon="../../images/icons/ic_clear_white_48px.svg"></md-icon>
-                    </md-button>
-                    <md-autocomplete flex="60" md-selected-item="selectedFlavor" md-search-text="searchText" md-selected-item-change="selectedFlavorChange( item , $index )" md-items="item in querySearch( searchText )" md-item-text="item.name" md-min-length="2" ng-model="flavor.name"
-                        md-menu-class="autocomplete-custom-template" required md-require-match md-floating-label="Flavor">
-                      <md-item-template>
-                        <span class="item-title">
+              <md-input-container class="md-icon-float">
+                <label>Base Nicotine Strength(mg/ml)</label>
+                <md-icon md-font-library="material-icons" class="md-dark">format_color_fill</md-icon>
+                <input type="number" required name="base_nicotine" ng-model="newRecipe.nicotineStrength" ng-change="updateRecipeValues()" min="0" max="10000000000000000">
+                <p class="hint" ng-hide="recipeForm.base_nicotine.$touched && recipeForm.base_nicotine.$invalid">What is the strength of the base nicotine?</p>
+                <div ng-messages="recipeForm.base_nicotine.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    If you don't want any nicotine in the recipe, just set this to "0"
+                  </div>
+                  <div ng-message="max">
+                    That's pretty dense! Are you trying to mix up your own black hole?
+                  </div>
+                  <div ng-message="min">
+                    Ummm...lets try using positive numbers.
+                  </div>
+                </div>
+              </md-input-container>
+
+
+              <!-- PG + VG amounts -->
+              <md-input-container class="md-icon-float">
+                <label>Propylene Glycol (Percent)</label>
+                <md-icon md-font-library="material-icons" class="md-dark">pie_chart</md-icon>
+                <input type="number" required name="pg" ng-model="newRecipe.pg.percent" min="0" max="100">
+                <div ng-messages="recipeForm.pg.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    If you don't want any pg in the recipe, just set this to "0"
+                  </div>
+                  <div ng-message="max">
+                    I know you always put {{recipeForm.pg.$viewValue}}% into life, but you can't do it here.
+                  </div>
+                  <div ng-message="min">
+                    Ummm...lets try using positive numbers.
+                  </div>
+                </div>
+              </md-input-container>
+
+              <md-input-container class="md-icon-float">
+                <label>Vegetable Glycerin (Percent)</label>
+                <md-icon md-font-library="material-icons" class="md-dark">pie_chart</md-icon>
+                <input type="number" required name="vg" ng-model="newRecipe.vg.percent" min="0" max="100">
+                <div ng-messages="recipeForm.vg.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    If you don't want any vg in the recipe, just set this to "0"
+                  </div>
+                  <div ng-message="max">
+                    I know you always put {{recipeForm.vg.$viewValue}}% into life, but you can't do it here.
+                  </div>
+                  <div ng-message="min">
+                    Ummm...lets try using positive numbers.
+                  </div>
+                </div>
+              </md-input-container>
+
+              <md-toolbar>
+                <div class="md-toolbar-tools">Flavors</div>
+              </md-toolbar>
+
+              <div ng-repeat="flavor in newRecipe.flavors">
+                <div layout="row" layout-align="space-between center">
+                  <md-button class="md-icon-button" ng-hide="!$first" ng-click="addFlavorLine()">
+                    <md-icon md-font-library="material-icons" class="md-primary">add_circle_outline</md-icon>
+                  </md-button>
+                  <md-button class="md-icon-button" ng-hide="$index === 0" ng-click="removeFlavorLine($index)">
+                    <md-icon md-font-library="material-icons" class="md-warn">remove_circle_outline</md-icon>
+                  </md-button>
+                  <md-autocomplete flex="60" md-selected-item="selectedFlavor" md-search-text="searchText" md-selected-item-change="selectedFlavorChange( item , $index )" md-items="item in querySearch( searchText )" md-item-text="item.name" md-min-length="2" ng-model="flavor.name"
+                      md-menu-class="autocomplete-custom-template" required md-require-match md-floating-label="Flavor" name="flavor">
+                    <div ng-messages="recipeForm.flavor.$error" multiple md-auto-hide="false">
+                      <div ng-message="required">
+                        Pretty please type in the name of the flavor!
+                      </div>
+                      <div ng-message="md-require-match">
+                        You have to use a known flavor for this recipe.
+                      </div>
+                    </div>
+                    <md-item-template>
+                      <span class="item-title">
                             <md-icon md-svg-icon="../../images/icons/ic_menu_white_48px.svg"></md-icon>
                             <span><strong>Flavor</strong> {{item.name}}</span>
-                        </span>
-                        <span class="item-metadata">
+                      </span>
+                      <span class="item-metadata">
                             <span>
                                 <strong>Brand:</strong> {{item.brand}}
                             </span>
-                        <span>
+                      <span>
                                 <strong>Company:</strong> {{item.name}}
                             </span>
-                        </span>
-                      </md-item-template>
-                    </md-autocomplete>
+                      </span>
+                    </md-item-template>
+                  </md-autocomplete>
 
-                    <md-input-container flex="30">
-                      <label>Percent</label>
-                      <input type="text" required ng-model="flavor.percent">
-                    </md-input-container>
-                  </div>
+                  <md-input-container flex="30">
+                    <label>Percent</label>
+                    <input type="number" required name="flavor_percent" ng-model="flavor.percent" min="0" max="100">
+                    <div ng-messages="recipeForm.flavor_percent.$error" multiple md-auto-hide="false">
+                      <div ng-message="required">
+                        We need to know the percentage for the correct mixture.
+                      </div>
+                      <div ng-message="max">
+                        I know you always put {{recipeForm.vg.$viewValue}}% into life, but you can't do it here.
+                      </div>
+                      <div ng-message="min">
+                        Ummm...lets try using positive numbers.
+                      </div>
+                    </div>
+                  </md-input-container>
                 </div>
-
-                <md-chips ng-model="newRecipe.tags" md-separator-keys="keys" placeholder="Enter a tag" secondary-placeholder="+Tag">
-                </md-chips>
-
               </div>
-            </form>
-
-            <md-fab-toolbar md-open="fabToolbarOpen" md-direction="left">
-              <md-fab-trigger class="align-with-text">
-                <md-button aria-label="menu" class="md-fab md-primary">
-                  <md-icon md-svg-src="../../images/icons/ic_menu_white_48px.svg"></md-icon>
-                </md-button>
-              </md-fab-trigger>
 
               <md-toolbar>
-                <md-fab-actions class="md-toolbar-tools">
-                  <md-button ng-click="changeUnitType('Milliliters')">
-                    Milliliters
-                  </md-button>
-                  <md-button ng-click="changeUnitType('Grams')">
-                    Grams
-                  </md-button>
-                  <md-button ng-click="changeUnitType('Percent')">
-                    Percent
-                  </md-button>
-                  <md-button ng-click="changeUnitType('Drops')">
-                    Drops
-                  </md-button>
-                </md-fab-actions>
+                <div class="md-toolbar-tools">Extra Information</div>
               </md-toolbar>
-            </md-fab-toolbar>
+              <br>
 
-            <section layout="row" layout-align="space-around center">
-              <div flex="45">
-                <md-card md-primary="dark-grey">
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-headline">Nicotine</span>
-                      <span class="md-subhead">{{newRecipe.nicotine[currentUnitType] || 0}} {{currentUnitType}}</span>
-                    </md-card-title-text>
-                  </md-card-title>
-                </md-card>
-              </div>
-              <div flex="45">
-                <md-card md-primary="dark-grey">
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-headline">Propylene Glycol (PG)</span>
-                      <span class="md-subhead">{{newRecipe.pg[currentUnitType] || 0}} {{currentUnitType}}</span>
-                    </md-card-title-text>
-                  </md-card-title>
-                </md-card>
-              </div>
-            </section>
-            <section layout="row" layout-align="space-around center">
-              <div flex="45">
-                <md-card md-primary="dark-grey">
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-headline">Vegetable Glycerin (VG)</span>
-                      <span class="md-subhead">{{newRecipe.vg[currentUnitType] || 0}} {{currentUnitType}}</span>
-                    </md-card-title-text>
-                  </md-card-title>
-                </md-card>
-              </div>
-              <div flex="45">
-                <md-card md-primary="dark-grey">
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-headline">Nicotine</span>
-                      <span class="md-subhead">{{newRecipe.nicotine[currentUnitType] || 0}} {{currentUnitType}}</span>
-                    </md-card-title-text>
-                  </md-card-title>
-                </md-card>
-              </div>
-            </section>
+              <md-chips ng-model="newRecipe.tags" md-separator-keys="keys" placeholder="Enter a tag" secondary-placeholder="+Tag">
+              </md-chips>
+              <br>
+
+              <md-toolbar>
+                <div class="md-toolbar-tools">Mixing Table</div>
+              </md-toolbar>
+              <br>
+
+              <md-fab-toolbar md-open="fabToolbarOpen" md-direction="left">
+                <md-fab-trigger class="align-with-text">
+                  <md-button aria-label="menu" class="md-fab md-primary">
+                    <md-icon md-svg-src="../../images/icons/ic_menu_white_48px.svg"></md-icon>
+                  </md-button>
+                </md-fab-trigger>
+
+                <md-toolbar>
+                  <md-fab-actions class="md-toolbar-tools">
+                    <md-button ng-click="changeUnitType('Milliliters')">
+                      Milliliters
+                    </md-button>
+                    <md-button ng-click="changeUnitType('Grams')">
+                      Grams
+                    </md-button>
+                    <md-button ng-click="changeUnitType('Percent')">
+                      Percent
+                    </md-button>
+                    <md-button ng-click="changeUnitType('Drops')">
+                      Drops
+                    </md-button>
+                  </md-fab-actions>
+                </md-toolbar>
+              </md-fab-toolbar>
+
+              <table style="width:100%">
+                <tr>
+                  <th>Nicotine</th>
+                  <th>PG</th>
+                  <th>VG</th>
+                  <div ng-repeat="flavor in newRecipe.flavors">
+                    <th>{{flavor.name}}</th>
+                  </div>
+                </tr>
+                <tr>
+                  <td>{{newRecipe.nicotine[currentUnitType] || 0}} {{currentUnitType}}</td>
+                  <td>{{newRecipe.pg[currentUnitType] || 0}} {{currentUnitType}}</td>
+                  <td>{{newRecipe.vg[currentUnitType] || 0}} {{currentUnitType}}</td>
+                  <div ng-repeat="flavor in newRecipe.flavors">
+                    <td>{{flavor[currentUnitType]}} {{currentUnitType}}</th>
+                  </div>
+                </tr>
+              </table>
+
+            </div>
+          </form>
         </md-tab>
+
         <md-tab label="New Flavor">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Tab Two</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
-              felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices
-              ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis,
-              iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-            <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at
-              convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus
-              sapien sit amet, tempus sapien.</p>
-            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante
-              eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-          </md-content>
+          <form class="form-vertical" role="form" ng-submit="createFlavor()" onkeypress="return event.keyCode != 13;" name="flavorForm">
+            <div layout="column">
+              <md-input-container>
+                <label>Name</label>
+                <input type="text" required ng-model="newFlavor.name" min="0" max="100">
+              </md-input-container>
+              <md-input-container>
+                <label>Brand</label>
+                <input type="text" required ng-model="newFlavor.brand" min="0" max="100">
+              </md-input-container>
+              <md-input-container>
+                <label>Link</label>
+                <input type="text" required ng-model="newFlavor.link" min="0" max="100">
+              </md-input-container>
+
+              <md-chips ng-model="newFlavor.tags" md-separator-keys="keys" placeholder="Enter a tag" secondary-placeholder="+Tag">
+              </md-chips>
+
+              <md-input-container class="md-block">
+                <label>Description</label>
+                <textarea required ng-model="newFlavor.description" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+
+              <br>
+              <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+
+            </div>
+          </form>
         </md-tab>
       </md-tabs>
-      </md-content>
+    </md-content>
 
-      <div flex-gt-sm="15" flex-xs="5">
-      </div>
+    <div flex-xs="0" flex-gt-sm="25">
+    </div>
   </div>
-  <!--
-  <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
-      <md-content layout="column" layout-margin>
-      <md-input-container>
-        <label>Name</label>
-        <input type="text" required ng-model="newRecipe.name">
-      </md-input-container>
-
-      <md-input-container>
-        <label>Description</label>
-        <input type="text" required ng-model="newRecipe.description">
-      </md-input-container>
-
-      <md-input-container>
-        <label>Cost</label>
-        <div class="row">
-          <div class="col-xs-3">
-            <select class="form-control" id="sel1" ng-model="newRecipe.currency">
-              <option>USD</option>
-            </select>
-          </div>
-          <div class="col-xs-9">
-            <input type="text" required ng-model="newRecipe.cost">
-          </div>
-        </div>
-      </md-input-container>
-
-      <md-input-container>
-        <label>Nicotine</label>
-        <div class="row">
-          <div class="col-xs-4">
-            <input type="text" required class="form-control" placeholder="Milliliters" ng-model="newRecipe.nicotine.ml">
-          </div>
-          <div class="col-xs-4">
-            <input type="text" class="form-control" placeholder="Grams" ng-model="newRecipe.nicotine.grams">
-          </div>
-          <div class="col-xs-4">
-            <input type="text" class="form-control" placeholder="Percent" ng-model="newRecipe.nicotine.percent">
-          </div>
-        </div>
-      </md-input-container>
-
-      <md-input-container>
-        <label>Propylene Glycol (PG)</label>
-        <div class="row">
-          <div class="col-xs-4">
-            <input type="text" required class="form-control" placeholder="Milliliters" ng-model="newRecipe.pg.ml">
-          </div>
-          <div class="col-xs-4">
-            <input type="text" class="form-control" placeholder="Grams" ng-model="newRecipe.pg.grams">
-          </div>
-          <div class="col-xs-4">
-            <input type="text" class="form-control" placeholder="Percent" ng-model="newRecipe.pg.percent">
-          </div>
-        </div>
-      </md-input-container>
-
-      <md-input-container>
-        <label>Vegetable Glycerin (VG)</label>
-        <div class="row">
-          <div class="col-xs-4">
-            <input type="text" required class="form-control" placeholder="Milliliters" ng-model="newRecipe.vg.ml">
-          </div>
-          <div class="col-xs-4">
-            <input type="text" class="form-control" placeholder="Grams" ng-model="newRecipe.vg.grams">
-          </div>
-          <div class="col-xs-4">
-            <input type="text" class="form-control" placeholder="Percent" ng-model="newRecipe.vg.percent">
-          </div>
-        </div>
-      </md-input-container>
-
-      <md-input-container>
-        <label>Flavors</label>
-        <div ng-repeat="flavor in newRecipe.flavors">
-          <div class="row form-group">
-              <div class="col-xs-1">
-                <a class="btn btn-danger" ng-click="removeFlavorLine($index)" ng-hide="$first">
-                  <span class="glyphicon glyphicon-minus"></span>
-                </a>
-              </div>
-              <div class="col-xs-5">
-                <input type="text" ng-model="flavor.name" placeholder="Name" uib-typeahead="flavor as flavor.name for flavor in search($viewValue)" typeahead-on-select="flavorSelected($item,$index)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
-              </div>
-              <div class="col-xs-2">
-                <input type="text" required class="form-control" placeholder="Milliliters" ng-model="flavor.ml">
-              </div>
-              <div class="col-xs-2">
-                <input type="text" required class="form-control" placeholder="Grams" ng-model="flavor.grams">
-              </div>
-              <div class="col-xs-2">
-                <input type="text" required class="form-control" placeholder="Percent" ng-model="flavor.percent">
-              </div>
-          </div>
-        </div>
-        <a class="btn btn-primary" ng-click="addFlavorLine()">
-          Add Flavor
-        </a>
-      </md-input-container>
-
-      <md-input-container>
-        <label>Tags</label>
-        <div class="row">
-          <div class="col-xs-10">
-            <input type="text" class="form-control" name="tags" placeholder="Tag" id="tags" ng-model="tag_value" ng-keypress="($event.charCode==13)? addTag() : return">
-          </div>
-          <div class="col-xs-2">
-            <button type="button" class="btn btn-primary" ng-click="addTag()">Add Tag</button>
-          </div>
-        </div>
-        <div class="tag-container">
-            <div ng-repeat="tag in newRecipe.tags" class="chip">
-              {{tag}}
-              <span class="closebtn" ng-click="removeTag($index)">&times;</span>
-            </div>
-        </div>
-      </md-input-container>
-
-      <md-input-container>
-        <button type="submit" class="btn btn-primary" ng-disabled="!currentUser">Submit</button>
-      </md-input-container>
-
-      </md-content>
-  </form>
-
-  <div style="height:1000px"></div>
--->
 </div>

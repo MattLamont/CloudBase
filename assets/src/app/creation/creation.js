@@ -1,4 +1,4 @@
-angular.module('sailng.creation', ['ngMaterial' , 'ngMessages'])
+angular.module('sailng.creation', ['ngMaterial', 'ngMessages'])
 
   .config(function config($stateProvider) {
     $stateProvider.state('creation', {
@@ -32,7 +32,7 @@ angular.module('sailng.creation', ['ngMaterial' , 'ngMessages'])
         "percent": null,
         "drops": null
       },
-      "nicotineStrength":100,
+      "nicotineStrength": 100,
       "pg": {
         "ml": "",
         "grams": "",
@@ -43,6 +43,14 @@ angular.module('sailng.creation', ['ngMaterial' , 'ngMessages'])
         "grams": "",
         "percent": ""
       }
+    };
+
+    $scope.newFlavor = {
+      "name": "",
+      "brand": "",
+      "link": "",
+      "tags": [],
+      "description": ""
     };
 
     $scope.currentUser = config.currentUser;
@@ -109,14 +117,22 @@ angular.module('sailng.creation', ['ngMaterial' , 'ngMessages'])
       $scope.currentUnitType = type;
     };
 
-    $scope.updateRecipeValues = function(){
-        console.log( "changing");
-        $scope.newRecipe.nicotine.Grams = ($scope.newRecipe.targetNicotine * $scope.newRecipe.totalVolume) / 1000;
-        $scope.newRecipe.nicotine.Milliliters = $scope.newRecipe.nicotine.Grams / $scope.newRecipe.nicotineStrength;
-        $scope.newRecipe.nicotine.Percent = ($scope.newRecipe.nicotine.Milliliters / $scope.newRecipe.totalVolume) * 100;
-        $scope.newRecipe.nicotine.Drops = Math.round( $scope.newRecipe.nicotine.Milliliters / 0.05 );
+    $scope.updateRecipeValues = function() {
+      console.log("changing");
+      $scope.newRecipe.nicotine.Grams = ($scope.newRecipe.targetNicotine * $scope.newRecipe.totalVolume) / 1000;
+      $scope.newRecipe.nicotine.Milliliters = $scope.newRecipe.nicotine.Grams / $scope.newRecipe.nicotineStrength * 1000;
+      $scope.newRecipe.nicotine.Percent = ($scope.newRecipe.nicotine.Milliliters / $scope.newRecipe.totalVolume) * 100;
+      $scope.newRecipe.nicotine.Drops = Math.round($scope.newRecipe.nicotine.Milliliters / 0.05);
 
-        console.log( $scope.newRecipe.nicotine );
+      console.log($scope.newRecipe.nicotine);
+    };
+
+    $scope.createFlavor = function() {
+        $http
+          .post('/api/flavor' , $scope.newFlavor)
+          .then(function(data) {
+            console.log( data );
+          });
     };
 
   });

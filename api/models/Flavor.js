@@ -14,19 +14,14 @@ module.exports = {
       required: true
     },
 
-    company: {
-      type: 'string',
-      required: true
-    },
-
     brand: {
       type: 'string',
       defaultsTo: 'None'
     },
 
-    sizes: {
-      type: 'array',
-      defaultsTo: []
+    link: {
+      type: 'string',
+      required: true
     },
 
     tags: {
@@ -34,14 +29,24 @@ module.exports = {
       defaultsTo: ['Flavor']
     },
 
-    cost: {
-      type: 'string',
-      defaultsTo: '0.00'
-    },
-
     description: {
       type: 'string',
-      defaultsTo: 'None'
+      required: true
+    },
+
+    likes: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+
+    dislikes: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+
+    rating: {
+      type: 'integer',
+      defaultsTo: 0
     }
 
   }

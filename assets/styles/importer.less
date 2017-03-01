@@ -61,6 +61,39 @@ body {
   min-width: 100%;
 }
 
+table, th, td {
+    border: 1px solid black;
+    text-align: left;
+}
+
+.hint {
+  /* Position the hint */
+  position: relative;
+  left: 2px;
+  top:7px;
+  /* Copy styles from ng-messages */
+  font-size: 12px;
+  line-height: 14px;
+  /* Set our own color */
+  color: grey;
+}
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+
 .autocomplete-custom-template li {
   border-bottom: 1px solid #ccc;
   height: auto;
