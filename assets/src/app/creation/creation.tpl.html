@@ -12,19 +12,18 @@
 
                 <md-input-container>
                   <label>Name</label>
-                  <input type="text" required ng-model="newRecipe.name" name="name" minlength="2" maxlength="50">
-                  <!--<div class="hint">What are you going to name this beautiful creation?</div>-->
-                  <div ng-messages="projectForm.name.$error" multiple md-auto-hide="false">
+                  <input type="text" required ng-model="newRecipe.name" name="name" minlength="3" maxlength="50">
+                  <div ng-messages="recipeForm.name.$error" multiple md-auto-hide="false">
                     <div ng-message="required">
-                      You've got to charge something! You can't just <b>give away</b> a Missile Defense System.
+                      You've got to give your beautiful new creation some name!
                     </div>
 
-                    <div ng-message="min">
-                      You should charge at least $800 an hour. This job is a big deal... if you mess up, everyone dies!
+                    <div ng-message="minlength">
+                      Your juice deserves a name with more than 2 letters...
                     </div>
 
-                    <div ng-message="max">
-                      {{projectForm.rate.$viewValue | currency:"$":0}} an hour? That's a little ridiculous. I doubt even Bill Clinton could afford that.
+                    <div ng-message="maxlength">
+                      Lets try to keep that name below 50 characters.
                     </div>
                   </div>
                 </md-input-container>
@@ -46,7 +45,15 @@
                   </md-input-container>
                   <md-input-container flex="70">
                     <label>Cost</label>
-                    <input type="text" ng-model="newRecipe.cost">
+                    <input type="number" ng-model="newRecipe.cost" name="cost" max="9999" min="0">
+                    <div ng-messages="recipeForm.cost.$error" multiple md-auto-hide="false">
+                      <div ng-message="max">
+                        Wow it costs {{recipeForm.cost.$viewValue | currency:"$":0}}?! Does it have gold flakes mixed in?
+                      </div>
+                      <div ng-message="min">
+                        We wish ejuice had negative cost too! Sadly it doesn't.
+                      </div>
+                    </div>
                   </md-input-container>
                 </div>
 

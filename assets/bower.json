@@ -19,7 +19,8 @@
     "sails.io.js": "^1.1.5",
     "angularSails": "^0.12.1",
     "lodash": "~3.0.0",
-    "angular-moment": "^1.0.1"
+    "angular-moment": "^1.0.1",
+    "angular-messages": "1.5.9"
   },
   "resolutions": {
     "angular": "^1.4.8",

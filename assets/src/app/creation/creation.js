@@ -18,7 +18,7 @@ angular.module('sailng.creation', ['ngMaterial' , 'ngMessages'])
       "name": "",
       "description": "",
       "cost": "",
-      "currency": "",
+      "currency": null,
       "flavors": [{
         "name": "",
         "ml": "",
