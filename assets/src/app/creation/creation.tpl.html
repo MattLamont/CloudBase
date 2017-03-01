@@ -76,15 +76,15 @@
                 <div layout="row" layout-align="space-between center">
                   <md-input-container flex="30">
                     <label>Nicotine ({{currentUnitType}})</label>
-                    <input type="number" required ng-model="nicotineGetterSetter" ng-model-options="{ getterSetter: true }">
+                    <input type="number" required ng-model="newRecipe.nicotine[currentUnitType]">
                   </md-input-container>
                   <md-input-container flex="30">
                     <label>Propylene Glycol ({{currentUnitType}})</label>
-                    <input type="number" required ng-model="pgGetterSetter" ng-model-options="{ getterSetter: true }">
+                    <input type="number" required ng-model="newRecipe.pg[currentUnitType]">
                   </md-input-container>
                   <md-input-container flex="30">
                     <label>Vegetable Glycerin ({{currentUnitType}})</label>
-                    <input type="number" required ng-model="vgGetterSetter" ng-model-options="{ getterSetter: true }">
+                    <input type="number" required ng-model="newRecipe.vg[currentUnitType]">
                   </md-input-container>
                 </div>
 
@@ -116,7 +116,7 @@
 
                     <md-input-container flex="30">
                       <label>{{currentUnitType}}</label>
-                      <input type="text" required ng-model="flavor.ml">
+                      <input type="text" required ng-model="flavor[currentUnitType]">
                     </md-input-container>
                   </div>
                 </div>

@@ -100,31 +100,6 @@ angular.module('sailng.creation', ['ngMaterial'])
       };
     });
 
-    $scope.nicotineGetterSetter = function(value) {
-
-      if (arguments.length != 0) {
-        $scope.newRecipe.nicotine[$scope.currentUnitType] = value;
-      } else {
-        return $scope.newRecipe.nicotine[$scope.currentUnitType];
-      }
-    };
-
-    $scope.vgGetterSetter = function(value) {
-        if (arguments.length != 0) {
-          $scope.newRecipe.vg[$scope.currentUnitType] = value;
-        } else {
-          return $scope.newRecipe.vg[$scope.currentUnitType];
-        }
-    };
-
-    $scope.pgGetterSetter = function(value) {
-        if (arguments.length != 0) {
-          $scope.newRecipe.pg[$scope.currentUnitType] = value;
-        } else {
-          return $scope.newRecipe.pg[$scope.currentUnitType];
-        }
-    };
-
     $scope.changeUnitType = function(type) {
       $scope.currentUnitType = type;
       $scope.$apply();
