@@ -6,7 +6,31 @@
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="New Recipe">
           <md-content class="md-padding">
-            <h1 class="md-display-2">New Recipe</h1>
+            <md-fab-toolbar md-open="fabToolbarOpen" md-direction="left">
+              <md-fab-trigger class="align-with-text">
+                <md-button aria-label="menu" class="md-fab md-primary">
+                  <md-icon md-svg-src="../../images/icons/ic_menu_white_48px.svg"></md-icon>
+                </md-button>
+              </md-fab-trigger>
+
+              <md-toolbar>
+                <md-fab-actions class="md-toolbar-tools">
+                  <md-button ng-click="changeUnitType('Milliliters')">
+                    Milliliters
+                  </md-button>
+                  <md-button ng-click="changeUnitType('Grams')">
+                    Grams
+                  </md-button>
+                  <md-button ng-click="changeUnitType('Percent')">
+                    Percent
+                  </md-button>
+                  <md-button ng-click="changeUnitType('Drops')">
+                    Drops
+                  </md-button>
+                </md-fab-actions>
+              </md-toolbar>
+            </md-fab-toolbar>
+
             <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;">
               <div layout="column">
 
@@ -36,18 +60,31 @@
                   </md-input-container>
                 </div>
 
+                <!-- Desired Nicotine amount and total volume -->
                 <div layout="row" layout-align="space-between center">
-                  <md-input-container>
-                    <label>Nicotine (ml)</label>
-                    <input type="text" required ng-model="newRecipe.nicotine.ml">
+                  <md-input-container flex="45">
+                    <label>Desired Nicotine Strength (mg/ml)</label>
+                    <input type="number" required ng-model="newRecipe.targetNicotine">
                   </md-input-container>
-                  <md-input-container>
-                    <label>Propylene Glycol (ml)</label>
-                    <input type="text" required ng-model="newRecipe.nicotine.ml">
+                  <md-input-container flex="45">
+                    <label>Desired Total Volume (ml)</label>
+                    <input type="number" required ng-model="newRecipe.totalVolume">
                   </md-input-container>
-                  <md-input-container>
-                    <label>Vegetable Glycerin (ml)</label>
-                    <input type="text" required ng-model="newRecipe.nicotine.ml">
+                </div>
+
+                <!-- PG + VG + Nicotine amounts -->
+                <div layout="row" layout-align="space-between center">
+                  <md-input-container flex="30">
+                    <label>Nicotine ({{currentUnitType}})</label>
+                    <input type="number" required ng-model="nicotineGetterSetter" ng-model-options="{ getterSetter: true }">
+                  </md-input-container>
+                  <md-input-container flex="30">
+                    <label>Propylene Glycol ({{currentUnitType}})</label>
+                    <input type="number" required ng-model="pgGetterSetter" ng-model-options="{ getterSetter: true }">
+                  </md-input-container>
+                  <md-input-container flex="30">
+                    <label>Vegetable Glycerin ({{currentUnitType}})</label>
+                    <input type="number" required ng-model="vgGetterSetter" ng-model-options="{ getterSetter: true }">
                   </md-input-container>
                 </div>
 
@@ -78,7 +115,7 @@
                     </md-autocomplete>
 
                     <md-input-container flex="30">
-                      <label>Milliliters</label>
+                      <label>{{currentUnitType}}</label>
                       <input type="text" required ng-model="flavor.ml">
                     </md-input-container>
                   </div>

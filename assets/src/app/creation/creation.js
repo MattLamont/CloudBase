@@ -27,9 +27,10 @@ angular.module('sailng.creation', ['ngMaterial'])
       }],
       "tags": [],
       "nicotine": {
-        "ml": "",
-        "grams": "",
-        "percent": ""
+        "Milliliters": "",
+        "Grams": "",
+        "Percent": "",
+        "Drops":""
       },
       "pg": {
         "ml": "",
@@ -48,6 +49,10 @@ angular.module('sailng.creation', ['ngMaterial'])
     $scope.searchText = "";
 
     $scope.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
+
+    $scope.fabToolbarOpen = false;
+
+    $scope.currentUnitType = "Percent";
 
     $scope.querySearch = function(query) {
       return $http
@@ -94,5 +99,35 @@ angular.module('sailng.creation', ['ngMaterial'])
         name: currency
       };
     });
+
+    $scope.nicotineGetterSetter = function(value) {
+
+      if (arguments.length != 0) {
+        $scope.newRecipe.nicotine[$scope.currentUnitType] = value;
+      } else {
+        return $scope.newRecipe.nicotine[$scope.currentUnitType];
+      }
+    };
+
+    $scope.vgGetterSetter = function(value) {
+        if (arguments.length != 0) {
+          $scope.newRecipe.vg[$scope.currentUnitType] = value;
+        } else {
+          return $scope.newRecipe.vg[$scope.currentUnitType];
+        }
+    };
+
+    $scope.pgGetterSetter = function(value) {
+        if (arguments.length != 0) {
+          $scope.newRecipe.pg[$scope.currentUnitType] = value;
+        } else {
+          return $scope.newRecipe.pg[$scope.currentUnitType];
+        }
+    };
+
+    $scope.changeUnitType = function(type) {
+      $scope.currentUnitType = type;
+      $scope.$apply();
+    };
 
   });

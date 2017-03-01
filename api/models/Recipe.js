@@ -47,7 +47,7 @@ module.exports = {
     totalVolume: {
       type: 'integer',
       required: true
-    }
+  },
 
     targetNicotine: {
       type: 'json',
