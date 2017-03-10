@@ -37,10 +37,15 @@
 @import (less) '../bower_components/angular-material/angular-material.css';
 @light-grey: #3e464c;
 @dark-grey: #363f45;
+@off-white: #d8dfe2;
+
+html {
+  background-color: @off-white;
+}
 
 body {
-  //padding-top: 50px;
-  //background-color: @light-grey;
+  //padding-top: 50;
+  background-color: @off-white;
 }
 
 .login-container {
@@ -61,16 +66,20 @@ body {
   min-width: 100%;
 }
 
-table, th, td {
-    border: 1px solid black;
-    text-align: left;
+table,
+td,
+th {
+  border: 1px solid black;
+  text-align: left;
 }
+
+upload-button {}
 
 .hint {
   /* Position the hint */
   position: relative;
   left: 2px;
-  top:7px;
+  top: 7px;
   /* Copy styles from ng-messages */
   font-size: 12px;
   line-height: 14px;
@@ -94,6 +103,22 @@ table, th, td {
   color: rgba(255, 255, 255, 0.3);
 }
 
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
 .autocomplete-custom-template li {
   border-bottom: 1px solid #ccc;
   height: auto;
@@ -115,5 +140,101 @@ table, th, td {
 .autocomplete-custom-template .item-title md-icon {
   height: 18px;
   width: 18px;
+}
+
+.gridListdemoDynamicTiles md-icon {
+  width: 50%;
+  height: 30%;
+}
+
+.gridListdemoDynamicTiles md-icon svg {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.gridListdemoDynamicTiles .s64 {
+  font-size: 64px;
+}
+
+.gridListdemoDynamicTiles .s32 {
+  font-size: 48px;
+}
+
+.gridListdemoDynamicTiles md-icon.fa {
+  display: block;
+  padding-left: 0;
+}
+
+.gridListdemoDynamicTiles md-icon.s32 span {
+  padding-left: 8px;
+}
+
+.gridListdemoDynamicTiles md-grid-list {
+  margin: 8px;
+}
+
+.gridListdemoDynamicTiles .gray {
+  background: #f5f5f5;
+}
+
+.gridListdemoDynamicTiles .green {
+  background: #b9f6ca;
+}
+
+.gridListdemoDynamicTiles .yellow {
+  background: #ffff8d;
+}
+
+.gridListdemoDynamicTiles .blue {
+  background: #84ffff;
+}
+
+.gridListdemoDynamicTiles .darkBlue {
+  background: #80d8ff;
+}
+
+.gridListdemoDynamicTiles .deepBlue {
+  background: #448aff;
+}
+
+.gridListdemoDynamicTiles .purple {
+  background: #b388ff;
+}
+
+.gridListdemoDynamicTiles .lightPurple {
+  background: #8c9eff;
+}
+
+.gridListdemoDynamicTiles .red {
+  background: #ff8a80;
+}
+
+.gridListdemoDynamicTiles .pink {
+  background: #ff80ab;
+}
+
+.gridListdemoDynamicTiles md-grid-tile {
+  transition: all 300ms ease-out 50ms;
+}
+
+.gridListdemoDynamicTiles md-grid-tile md-icon {
+  padding-bottom: 32px;
+}
+
+.gridListdemoDynamicTiles md-grid-tile md-grid-tile-footer {
+  background: rgba(0, 0, 0, 0.68);
+  height: 36px;
+}
+
+.gridListdemoDynamicTiles md-grid-tile-footer figcaption {
+  width: 100%;
+}
+
+.gridListdemoDynamicTiles md-grid-tile-footer figcaption h3 {
+  margin: 0;
+  font-weight: 700;
+  width: 100%;
+  text-align: center;
 }
 // @import '../src/app/home/index.less';

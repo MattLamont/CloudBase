@@ -33,6 +33,7 @@ var jsFilesToInject = [
   'bower_components/moment/moment.js',
   'bower_components/angular-moment/angular-moment.js',
   'bower_components/angular-messages/angular-messages.js',
+  'bower_components/ng-file-upload/ng-file-upload.js',
 
   //
   // *->    you might put other dependencies like jQuery or Angular here   <-*

@@ -9,6 +9,7 @@ angular.module('sailng', [
     'models',
     'ngMaterial',
     'ngMessages',
+    'ngFileUpload',
 
     'sailng.header',
     'sailng.home',

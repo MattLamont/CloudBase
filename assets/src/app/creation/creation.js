@@ -1,4 +1,4 @@
-angular.module('sailng.creation', ['ngMaterial', 'ngMessages'])
+angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
 
   .config(function config($stateProvider) {
     $stateProvider.state('creation', {
@@ -11,8 +11,25 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages'])
       }
     });
   })
+  .service('fileUpload', ['$http', function($http) {
+    this.uploadFileToUrl = function(file, uploadUrl) {
+      var fd = new FormData();
+      fd.append('file', file);
 
-  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel) {
+      $http.post(uploadUrl, fd, {
+          transformRequest: angular.identity,
+          headers: {
+            'Content-Type': undefined
+          }
+        })
+
+        .success(function() {})
+
+        .error(function() {});
+    }
+  }])
+
+  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel,fileUpload) {
 
     $scope.newRecipe = {
       "name": "",
@@ -128,11 +145,37 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages'])
     };
 
     $scope.createFlavor = function() {
-        $http
-          .post('/api/flavor' , $scope.newFlavor)
-          .then(function(data) {
-            console.log( data );
-          });
+      $http
+        .post('/api/flavor', $scope.newFlavor)
+        .then(function(data) {
+          console.log(data);
+        });
     };
 
-  });
+    $scope.uploadFile = function() {
+      var file = $scope.myFile;
+
+      console.log('file is ');
+      console.dir(file);
+
+      var uploadUrl = "/fileUpload";
+      fileUpload.uploadFileToUrl(file, uploadUrl);
+    };
+
+  })
+
+  .directive('fileModel', ['$parse', function($parse) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function() {
+          scope.$apply(function() {
+            modelSetter(scope, element[0].files[0]);
+          });
+        });
+      }
+    };
+  }]);
