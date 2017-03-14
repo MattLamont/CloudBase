@@ -22,24 +22,24 @@
 module.exports.connections = {
 
   /***************************************************************************
-  *                                                                          *
-  * Local disk storage for DEVELOPMENT ONLY                                  *
-  *                                                                          *
-  * Installed by default.                                                    *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Local disk storage for DEVELOPMENT ONLY                                  *
+   *                                                                          *
+   * Installed by default.                                                    *
+   *                                                                          *
+   ***************************************************************************/
   localDiskDb: {
     adapter: 'sails-disk'
   },
 
   /***************************************************************************
-  *                                                                          *
-  * MySQL is the world's most popular relational database.                   *
-  * http://en.wikipedia.org/wiki/MySQL                                       *
-  *                                                                          *
-  * Run: npm install sails-mysql                                             *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * MySQL is the world's most popular relational database.                   *
+   * http://en.wikipedia.org/wiki/MySQL                                       *
+   *                                                                          *
+   * Run: npm install sails-mysql                                             *
+   *                                                                          *
+   ***************************************************************************/
   /*
   MysqlServer: {
     adapter: 'sails-mysql',
@@ -50,30 +50,31 @@ module.exports.connections = {
   },
 */
   /***************************************************************************
-  *                                                                          *
-  * MongoDB is the leading NoSQL database.                                   *
-  * http://en.wikipedia.org/wiki/MongoDB                                     *
-  *                                                                          *
-  * Run: npm install sails-mongo                                             *
-  *                                                                          *
-  ***************************************************************************/
-  /*
+   *                                                                          *
+   * MongoDB is the leading NoSQL database.                                   *
+   * http://en.wikipedia.org/wiki/MongoDB                                     *
+   *                                                                          *
+   * Run: npm install sails-mongo                                             *
+   *                                                                          *
+   ***************************************************************************/
+/*
   MongoDb: {
     adapter: 'sails-mongo',
-    host: 'localhost', // defaults to `localhost` if omitted
+    host: 'ec2-52-26-79-134.us-west-2.compute.amazonaws.com', // defaults to `localhost` if omitted
     port: 27017, // defaults to 27017 if omitted
-    database: 'CloudBaseDB' // or omit if not relevant
+    //database: 'CloudBaseDB' // or omit if not relevant
   },
 */
   /***************************************************************************
-  *                                                                          *
-  * PostgreSQL is another officially supported relational database.          *
-  * http://en.wikipedia.org/wiki/PostgreSQL                                  *
-  *                                                                          *
-  * Run: npm install sails-postgresql                                        *
-  *                                                                          *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * PostgreSQL is another officially supported relational database.          *
+   * http://en.wikipedia.org/wiki/PostgreSQL                                  *
+   *                                                                          *
+   * Run: npm install sails-postgresql                                        *
+   *                                                                          *
+   *                                                                          *
+   ***************************************************************************/
+  /*
   somePostgresqlServer: {
     adapter: 'sails-postgresql',
     host: 'YOUR_POSTGRES_SERVER_HOSTNAME_OR_IP_ADDRESS',
@@ -81,12 +82,12 @@ module.exports.connections = {
     password: 'YOUR_POSTGRES_PASSWORD',
     database: 'YOUR_POSTGRES_DB'
   }
-
+*/
 
   /***************************************************************************
-  *                                                                          *
-  * More adapters: https://github.com/balderdashy/sails                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * More adapters: https://github.com/balderdashy/sails                      *
+   *                                                                          *
+   ***************************************************************************/
 
 };
