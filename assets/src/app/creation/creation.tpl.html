@@ -4,7 +4,7 @@
 
   <div layout="row">
 
-    <md-content flex-offset-xs="0" flex-offset-gt-sm="25" flex md-whiteframe="4">
+    <md-content flex-offset-xs="0" flex-offset-gt-sm="25" flex md-whiteframe="8" class="foreground-element">
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Basic">
           <form class="form-vertical" role="form" ng-submit="createRecipe()" onkeypress="return event.keyCode != 13;" name="recipeForm">
@@ -13,10 +13,10 @@
               <md-toolbar>
                 <div class="md-toolbar-tools">Basic Info</div>
               </md-toolbar>
-              <md-content layout-padding layout="column">
+              <div layout-padding layout="column">
                 <md-input-container class="md-icon-float">
                   <label>Name</label>
-                  <md-icon md-font-library="material-icons" class="md-dark">face</md-icon>
+                  <md-icon md-font-library="material-icons" class="md-light">face</md-icon>
                   <input type="text" required ng-model="newRecipe.name" name="name" minlength="3" maxlength="60">
                   <!--<p class="hint" ng-hide="recipeForm.name.$touched && recipeForm.name.$invalid">Is it a boy or a girl?</p>-->
                   <div ng-messages="recipeForm.name.$error" multiple md-auto-hide="false">
@@ -32,11 +32,20 @@
 
                 <md-input-container class="md-icon-float">
                   <label>Description</label>
-                  <md-icon md-font-library="material-icons" class="md-dark">description</md-icon>
+                  <md-icon md-font-library="material-icons" class="md-light">description</md-icon>
                   <input type="text" required name="description" ng-model="newRecipe.description" maxlength="150">
                   <!--<p class="hint" ng-hide="recipeForm.description.$touched && recipeForm.name.$invalid">Don't Worry, there is no minimum word count.</p>-->
                 </md-input-container>
-              </md-content>
+
+                <md-input-container>
+                  <label>Category</label>
+                  <md-select ng-model="newRecipe.category" required>
+                    <md-option ng-repeat="category in categories" ng-value="category">
+                      {{category}}
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
               <!-- Cost inputs (Removed For Now)
                 <div layout="row">
                   <md-input-container flex="30" class="md-icon-float">
@@ -73,10 +82,10 @@
             <div class="md-toolbar-tools">Mixing Amounts</div>
           </md-toolbar>
 
-          <md-content layout-padding layout="column">
+          <div layout-padding layout="column">
             <md-input-container class="md-icon-float">
               <label>Volume (ml)</label>
-              <md-icon md-font-library="material-icons" name="volume" class="md-dark">local_drink</md-icon>
+              <md-icon md-font-library="material-icons" name="volume" class="md-light">local_drink</md-icon>
               <input type="number" required ng-model="newRecipe.totalVolume" ng-change="updateRecipeValues()" min="0" max="100000">
               <p class="hint" ng-hide="recipeForm.volume.$touched && recipeForm.volume.$invalid">What should the final total juice amount be?</p>
               <div ng-messages="recipeForm.volume.$error" multiple md-auto-hide="false">
@@ -95,7 +104,7 @@
             <!-- Desired Nicotine amount and total volume -->
             <md-input-container class="md-icon-float">
               <label>Strength (mg/ml)</label>
-              <md-icon md-font-library="material-icons" class="md-dark">fitness_center</md-icon>
+              <md-icon md-font-library="material-icons" class="md-light">fitness_center</md-icon>
               <input type="number" required name="nicotine" ng-model="newRecipe.targetNicotine" ng-change="updateRecipeValues()" min="0" max="200">
               <p class="hint" ng-hide="recipeForm.nicotine.$touched && recipeForm.nicotine.$invalid">How strong do you want the juice to be?</p>
               <div ng-messages="recipeForm.nicotine.$error" multiple md-auto-hide="false">
@@ -113,7 +122,7 @@
 
             <md-input-container class="md-icon-float">
               <label>Base Nicotine Strength(mg/ml)</label>
-              <md-icon md-font-library="material-icons" class="md-dark">format_color_fill</md-icon>
+              <md-icon md-font-library="material-icons" class="md-light">format_color_fill</md-icon>
               <input type="number" required name="base_nicotine" ng-model="newRecipe.nicotineStrength" ng-change="updateRecipeValues()" min="0" max="10000000000000000">
               <p class="hint" ng-hide="recipeForm.base_nicotine.$touched && recipeForm.base_nicotine.$invalid">What is the strength of the base nicotine?</p>
               <div ng-messages="recipeForm.base_nicotine.$error" multiple md-auto-hide="false">
@@ -133,7 +142,7 @@
             <!-- PG + VG amounts -->
             <md-input-container class="md-icon-float">
               <label>Propylene Glycol (Percent)</label>
-              <md-icon md-font-library="material-icons" class="md-dark">pie_chart</md-icon>
+              <md-icon md-font-library="material-icons" class="md-light">pie_chart</md-icon>
               <input type="number" required name="pg" ng-model="newRecipe.pg.percent" min="0" max="100">
               <div ng-messages="recipeForm.pg.$error" multiple md-auto-hide="false">
                 <div ng-message="required">
@@ -150,7 +159,7 @@
 
             <md-input-container class="md-icon-float">
               <label>Vegetable Glycerin (Percent)</label>
-              <md-icon md-font-library="material-icons" class="md-dark">pie_chart</md-icon>
+              <md-icon md-font-library="material-icons" class="md-light">pie_chart</md-icon>
               <input type="number" required name="vg" ng-model="newRecipe.vg.percent" min="0" max="100">
               <div ng-messages="recipeForm.vg.$error" multiple md-auto-hide="false">
                 <div ng-message="required">
@@ -164,13 +173,13 @@
                 </div>
               </div>
             </md-input-container>
-          </md-content>
+          </div>
 
           <md-toolbar>
             <div class="md-toolbar-tools">Flavors</div>
           </md-toolbar>
 
-          <md-content layout-padding layout="column">
+          <div layout-padding layout="column">
             <div ng-repeat="flavor in newRecipe.flavors">
               <div layout="row" layout-align="space-between center">
                 <md-button flex class="md-icon-button" ng-hide="!$first" ng-click="addFlavorLine()">
@@ -180,7 +189,7 @@
                   <md-icon md-font-library="material-icons" class="md-warn">remove_circle_outline</md-icon>
                 </md-button>
                 <md-autocomplete flex="60" md-selected-item="selectedFlavor" md-search-text="searchText" md-selected-item-change="selectedFlavorChange( item , $index )" md-items="item in querySearch( searchText )" md-item-text="item.name" md-min-length="2" ng-model="flavor.name"
-                    md-menu-class="autocomplete-custom-template" required md-require-match md-floating-label="Flavor" name="flavor">
+                    md-menu-class="autocomplete-custom-template" md-require-match md-floating-label="Flavor" name="flavor">
                   <div ng-messages="recipeForm.flavor.$error" multiple md-auto-hide="false">
                     <div ng-message="required">
                       Pretty please type in the name of the flavor!
@@ -207,7 +216,7 @@
 
                 <md-input-container flex="30">
                   <label>Percent</label>
-                  <input type="number" required name="flavor_percent" ng-model="flavor.percent" min="0" max="100">
+                  <input type="number" name="flavor_percent" ng-model="flavor.percent" min="0" max="100">
                   <div ng-messages="recipeForm.flavor_percent.$error" multiple md-auto-hide="false">
                     <div ng-message="required">
                       We need to know the percentage for the correct mixture.
@@ -222,7 +231,7 @@
                 </md-input-container>
               </div>
             </div>
-          </md-content>
+          </div>
         </md-tab>
 
         <md-tab label="Extra">
@@ -231,7 +240,7 @@
           </md-toolbar>
 
 
-          <md-content layout-padding layout="column">
+          <div layout-padding layout="column">
             <md-chips ng-model="newRecipe.tags" md-separator-keys="keys" placeholder="Enter a tag" secondary-placeholder="+Tag">
             </md-chips>
             <br>
@@ -242,7 +251,12 @@
             <br>
             <img ngf-src="file">
 
-          </md-content>
+            <md-input-container>
+              <label>Additional Information</label>
+              <textarea ng-model="newRecipe.additionalInfo" md-maxlength="200" rows="3" md-select-on-focus></textarea>
+            </md-input-container>
+
+          </div>
         </md-tab>
 
         <md-tab label="New Flavor">
@@ -276,6 +290,7 @@
           </form>
         </md-tab>
       </md-tabs>
+      <!--
       <md-toolbar>
         <div class="md-toolbar-tools">Mixing Table</div>
       </md-toolbar>
@@ -324,9 +339,10 @@
           </div>
         </tr>
       </table>
+  -->
     </md-content>
 
-
+    <md-button class="md-raised md-primary" ng-click="createRecipe()">Submit</md-button>
     <div flex-xs="0" flex-gt-sm="25">
     </div>
   </div>

@@ -35,17 +35,18 @@
  * project should be imported as the rest are just wasting space.
  */
 @import (less) '../bower_components/angular-material/angular-material.css';
-@light-grey: #3e464c;
-@dark-grey: #363f45;
-@off-white: #d8dfe2;
 
-html {
-  background-color: @off-white;
+@foreground-grey: #424242;
+@background-grey: #303030;
+@primary-color: #4caf50;
+
+
+.foreground-element{
+    background-color: @foreground-grey;
 }
 
-body {
-  //padding-top: 50;
-  background-color: @off-white;
+.primary-element{
+    background-color: @primary-color;
 }
 
 .login-container {
@@ -61,8 +62,8 @@ body {
 }
 
 .navbar {
-  background-color: @dark-grey;
-  color: white;
+  //background-color: @dark-grey;
+  //color: white;
   min-width: 100%;
 }
 
@@ -96,7 +97,7 @@ upload-button {}
 }
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light {
-  color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 .material-icons.md-light.md-inactive {

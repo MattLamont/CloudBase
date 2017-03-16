@@ -34,6 +34,11 @@ module.exports = {
       defaultsTo: 'None'
     },
 
+    category: {
+      type: 'string',
+      required: true
+    },
+
     author: {
       type: 'json',
       required: true
