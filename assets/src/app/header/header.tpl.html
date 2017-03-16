@@ -1,5 +1,5 @@
 <div ng-controller="HeaderCtrl">
-  <div layout="row" layout-padding class="navbar" layout-align="space-between center">
+  <div layout="row" layout-padding class="navbar primary-element" layout-align="space-between center" md-whiteframe="8">
     <div>
       <md-button href="/home">CloudBase</md-button>
       <md-button href="/popular">Popular</md-button>
@@ -11,7 +11,7 @@
     </div>
     <div ng-hide="!currentUser">
       <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSideNav()">
-        <md-icon md-font-library="material-icons md-48" class="md-light">menu</md-icon>
+        <md-icon md-font-library="material-icons md-48">menu</md-icon>
       </md-button>
     </div>
   </div>
@@ -23,7 +23,7 @@
       <div class="md-toolbar-tools" layout-align="space-between center">
         <h1>{{currentUser.username}}</h1>
         <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSideNav()">
-          <md-icon md-font-library="material-icons md-48" href="/creation" class="md-light">close</md-icon>
+          <md-icon md-font-library="material-icons md-48" href="/creation">close</md-icon>
         </md-button>
       </div>
     </md-toolbar>

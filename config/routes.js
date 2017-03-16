@@ -67,7 +67,7 @@ module.exports.routes = {
   'delete /api/recipe': 'RecipeController.destroy',
   'put /api/recipe/:id': 'RecipeController.update',
   'get /api/recipe/search': 'RecipeController.search',
-
+  'post /api/recipe/image': 'RecipeController.createImage',
 
   /* Flavor Routes */
   'get /api/flavors': 'FlavorController.getAll',

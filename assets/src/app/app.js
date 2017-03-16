@@ -19,7 +19,7 @@ angular.module('sailng', [
     'sailng.recipe'
   ])
 
-  .config(function myAppConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function myAppConfig($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
     $urlRouterProvider.otherwise(function($injector, $location) {
       if ($location.$$url === '/') {
@@ -30,6 +30,13 @@ angular.module('sailng', [
       }
     });
     $locationProvider.html5Mode(true);
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green')
+      .accentPalette('cyan')
+      .warnPalette('orange')
+      .dark();
+
   })
 
   .run(function run() {

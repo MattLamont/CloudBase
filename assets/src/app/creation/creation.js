@@ -1,4 +1,4 @@
-angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
+angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
   .config(function config($stateProvider) {
     $stateProvider.state('creation', {
@@ -29,13 +29,18 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
     }
   }])
 
-  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel,fileUpload) {
+  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel, fileUpload, Upload) {
 
     $scope.newRecipe = {
       "name": "",
       "description": "",
+      "category": "",
       "cost": "",
       "currency": null,
+      "additionalInfo": "",
+      "images": [],
+      "targetNicotine": 6,
+      "totalVolume": null,
       "flavors": [{
         "name": "",
         "ml": "",
@@ -51,14 +56,14 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
       },
       "nicotineStrength": 100,
       "pg": {
-        "ml": "",
-        "grams": "",
-        "percent": ""
+        "ml": null,
+        "grams": null,
+        "percent": 50
       },
       "vg": {
-        "ml": "",
-        "grams": "",
-        "percent": ""
+        "ml": null,
+        "grams": null,
+        "percent": 50
       }
     };
 
@@ -69,6 +74,17 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
       "tags": [],
       "description": ""
     };
+
+    $scope.categories = [
+      "Candy",
+      "Beverage",
+      "Cereal",
+      "Dessert",
+      "Menthol/Mint",
+      "Tobacco",
+      "Fruit",
+      "Food"
+    ];
 
     $scope.currentUser = config.currentUser;
 
@@ -82,7 +98,6 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
 
     $scope.pg_weight = 1.036;
     $scope.vg_weight = 1.261;
-
 
     $scope.querySearch = function(query) {
       return $http
@@ -101,11 +116,32 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages' ,'ngFileUpload'])
 
       $scope.newRecipe.author = $scope.currentUser.username;
 
+      console.log( $scope.file );
+
+      Upload.upload({
+        url: '/api/recipe/image',
+        data: {
+          file: $scope.file,
+          'username': $scope.username
+        }
+      }).then(function(resp) {
+        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp);
+        console.log( resp );
+      }, function(resp) {
+        console.log('Error status: ' + resp.status);
+      });
+
+      //var image_data = "{'file':"+$scope.file+",'filename':"}'
+/*
+      $http.post('/api/recipe/image', image_data).then(function(data) {
+        console.log(data);
+    });*/
+      /*
       RecipeModel.create($scope.newRecipe).then(function(model) {
         console.log(model);
         $window.location.href = '/recipe/' + model.results.id;
       });
-
+      */
     };
 
     $scope.addFlavorLine = function() {
