@@ -96,6 +96,7 @@ module.exports = {
       if (err) {
         return res.negotiate(err);
       }
+	  
       return res.ok({
         files: filesUploaded,
         textParams: req.params.all()

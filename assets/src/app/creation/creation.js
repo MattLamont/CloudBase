@@ -11,25 +11,8 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
       }
     });
   })
-  .service('fileUpload', ['$http', function($http) {
-    this.uploadFileToUrl = function(file, uploadUrl) {
-      var fd = new FormData();
-      fd.append('file', file);
 
-      $http.post(uploadUrl, fd, {
-          transformRequest: angular.identity,
-          headers: {
-            'Content-Type': undefined
-          }
-        })
-
-        .success(function() {})
-
-        .error(function() {});
-    }
-  }])
-
-  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel, fileUpload, Upload) {
+  .controller('CreationCtrl', function CreationController($scope, $sailsSocket, $window, $http, $mdConstant, config, titleService, RecipeModel, FlavorModel, Upload, $mdToast) {
 
     $scope.newRecipe = {
       "name": "",
@@ -100,9 +83,11 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.vg_weight = 1.261;
 
     $scope.querySearch = function(query) {
+        
       return $http
         .get('/api/flavor/search/?q=' + query)
         .then(function(data) {
+            console.log( data );
           return data.data.results;
         });
     };
@@ -116,32 +101,25 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
       $scope.newRecipe.author = $scope.currentUser.username;
 
-      console.log( $scope.file );
-
       Upload.upload({
         url: '/api/recipe/image',
         data: {
-          file: $scope.file,
-          'username': $scope.username
+          file: $scope.file
         }
       }).then(function(resp) {
-        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp);
-        console.log( resp );
-      }, function(resp) {
-        console.log('Error status: ' + resp.status);
-      });
+          $scope.newRecipe.images.push(resp.data.results.files[0].extra.Location);
 
-      //var image_data = "{'file':"+$scope.file+",'filename':"}'
-/*
-      $http.post('/api/recipe/image', image_data).then(function(data) {
-        console.log(data);
-    });*/
-      /*
-      RecipeModel.create($scope.newRecipe).then(function(model) {
-        console.log(model);
-        $window.location.href = '/recipe/' + model.results.id;
-      });
-      */
+          $http
+            .post('/api/recipe', $scope.newRecipe)
+            .then(function(data) {
+              console.log(data);
+            });
+
+        },
+        function(resp) {
+          $scope.showSimpleToast('Unable to save recipe image. Please try again.');
+          console.log('Error status: ' + resp.status);
+        });
     };
 
     $scope.addFlavorLine = function() {
@@ -172,10 +150,10 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
     $scope.updateRecipeValues = function() {
       console.log("changing");
-      $scope.newRecipe.nicotine.Grams = ($scope.newRecipe.targetNicotine * $scope.newRecipe.totalVolume) / 1000;
-      $scope.newRecipe.nicotine.Milliliters = $scope.newRecipe.nicotine.Grams / $scope.newRecipe.nicotineStrength * 1000;
-      $scope.newRecipe.nicotine.Percent = ($scope.newRecipe.nicotine.Milliliters / $scope.newRecipe.totalVolume) * 100;
-      $scope.newRecipe.nicotine.Drops = Math.round($scope.newRecipe.nicotine.Milliliters / 0.05);
+      $scope.newRecipe.nicotine.grams = ($scope.newRecipe.targetNicotine * $scope.newRecipe.totalVolume) / 1000;
+      $scope.newRecipe.nicotine.milliliters = $scope.newRecipe.nicotine.Grams / $scope.newRecipe.nicotineStrength * 1000;
+      $scope.newRecipe.nicotine.percent = ($scope.newRecipe.nicotine.Milliliters / $scope.newRecipe.totalVolume) * 100;
+      $scope.newRecipe.nicotine.drops = Math.round($scope.newRecipe.nicotine.Milliliters / 0.05);
 
       console.log($scope.newRecipe.nicotine);
     };
@@ -184,34 +162,37 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
       $http
         .post('/api/flavor', $scope.newFlavor)
         .then(function(data) {
+          $scope.showSimpleToast('Successfully created flavor: ' + $scope.newFlavor.name);
           console.log(data);
         });
     };
 
-    $scope.uploadFile = function() {
-      var file = $scope.myFile;
+    var last = {
+      bottom: false,
+      top: true,
+      left: false,
+      right: true
+    };
 
-      console.log('file is ');
-      console.dir(file);
+    $scope.toastPosition = angular.extend({}, last);
 
-      var uploadUrl = "/fileUpload";
-      fileUpload.uploadFileToUrl(file, uploadUrl);
+    $scope.getToastPosition = function() {
+      return Object.keys($scope.toastPosition)
+        .filter(function(pos) {
+          return $scope.toastPosition[pos];
+        })
+        .join(' ');
+    };
+
+    $scope.showSimpleToast = function(message) {
+      var pinTo = $scope.getToastPosition();
+
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent(message)
+        .position(pinTo)
+        .hideDelay(10000)
+      );
     };
 
   })
-
-  .directive('fileModel', ['$parse', function($parse) {
-    return {
-      restrict: 'A',
-      link: function(scope, element, attrs) {
-        var model = $parse(attrs.fileModel);
-        var modelSetter = model.assign;
-
-        element.bind('change', function() {
-          scope.$apply(function() {
-            modelSetter(scope, element[0].files[0]);
-          });
-        });
-      }
-    };
-  }]);
