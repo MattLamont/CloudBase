@@ -126,6 +126,8 @@ upload-button {}
   padding-top: 8px;
   padding-bottom: 8px;
   white-space: normal;
+  color: white;
+  background-color: @foreground-grey;
 }
 
 .autocomplete-custom-template li:last-child {
@@ -135,9 +137,11 @@ upload-button {}
 .autocomplete-custom-template .item-metadata,
 .autocomplete-custom-template .item-title {
   display: block;
-  padding: 0px;
-  margin: 0px;
-  //line-height: 2;
+  line-height: 2;
+}
+
+.autocomplete-custom-template .item-metadata{
+    color: rgba( 255, 255 ,255 , 0.7);
 }
 
 .autocomplete-custom-template .item-title md-icon {
