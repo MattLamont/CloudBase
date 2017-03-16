@@ -83,11 +83,10 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.vg_weight = 1.261;
 
     $scope.querySearch = function(query) {
-        
+
       return $http
         .get('/api/flavor/search/?q=' + query)
         .then(function(data) {
-            console.log( data );
           return data.data.results;
         });
     };
