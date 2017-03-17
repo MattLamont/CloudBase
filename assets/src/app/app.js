@@ -16,7 +16,8 @@ angular.module('sailng', [
     'sailng.about',
     'sailng.recent',
     'sailng.creation',
-    'sailng.recipe'
+    'sailng.recipe',
+    'sailng.recipeContainer'
   ])
 
   .config(function myAppConfig($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {

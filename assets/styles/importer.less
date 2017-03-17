@@ -35,18 +35,16 @@
  * project should be imported as the rest are just wasting space.
  */
 @import (less) '../bower_components/angular-material/angular-material.css';
-
 @foreground-grey: #424242;
 @background-grey: #303030;
 @primary-color: #4caf50;
 
-
-.foreground-element{
-    background-color: @foreground-grey;
+.foreground-element {
+  background-color: @foreground-grey;
 }
 
-.primary-element{
-    background-color: @primary-color;
+.primary-element {
+  background-color: @primary-color;
 }
 
 .login-container {
@@ -72,6 +70,13 @@ td,
 th {
   border: 1px solid black;
   text-align: left;
+}
+
+.center-cropped {
+  object-fit: cover;
+  object-position: top;
+  height: 300px;
+  width: 300px;
 }
 
 upload-button {}
@@ -140,8 +145,8 @@ upload-button {}
   line-height: 2;
 }
 
-.autocomplete-custom-template .item-metadata{
-    color: rgba( 255, 255 ,255 , 0.7);
+.autocomplete-custom-template .item-metadata {
+  color: rgba( 255, 255 ,255 , 0.7);
 }
 
 .autocomplete-custom-template .item-title md-icon {

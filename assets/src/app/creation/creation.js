@@ -21,7 +21,7 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
       "cost": "",
       "currency": null,
       "additionalInfo": "",
-      "images": [],
+      "images": [""],
       "targetNicotine": 6,
       "totalVolume": null,
       "flavors": [{
@@ -106,7 +106,7 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
           file: $scope.file
         }
       }).then(function(resp) {
-          $scope.newRecipe.images.push(resp.data.results.files[0].extra.Location);
+          $scope.newRecipe.images[0] = resp.data.results.files[0].extra.Location;
 
           $http
             .post('/api/recipe', $scope.newRecipe)
