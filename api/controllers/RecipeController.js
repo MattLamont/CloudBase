@@ -96,12 +96,42 @@ module.exports = {
       if (err) {
         return res.negotiate(err);
       }
-	  
+
       return res.ok({
         files: filesUploaded,
         textParams: req.params.all()
       });
     });
+  },
+
+  getRecent: function(req, res) {
+
+    Recipe.find({
+        limit: 200
+      })
+      .sort('createdAt DESC')
+      .exec(function(err, recipes) {
+
+        if (err) {
+          return res.negotiate(err);
+        }
+        return res.ok(recipes);
+      });
+  },
+
+  getPopular: function(req, res) {
+
+    Recipe.find({
+        limit: 200
+      })
+      .sort('views DESC')
+      .exec(function(err, recipes) {
+
+        if (err) {
+          return res.negotiate(err);
+        }
+        return res.ok(recipes);
+      });
   },
 
 };

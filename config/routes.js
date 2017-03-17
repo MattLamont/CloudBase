@@ -61,6 +61,8 @@ module.exports.routes = {
   'put /popular/:id': 'PopularController.update',
 
   /* Recipe Routes */
+  'get /api/recipes/recent': 'RecipeController.getRecent',
+  'get /api/recipes/popular': 'RecipeController.getPopular',
   'get /api/recipes': 'RecipeController.getAll',
   'get /api/recipe/:id': 'RecipeController.getOne',
   'post /api/recipe': 'RecipeController.create',
