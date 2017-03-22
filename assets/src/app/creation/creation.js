@@ -111,7 +111,7 @@ angular.module('sailng.creation', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
           $http
             .post('/api/recipe', $scope.newRecipe)
             .then(function(data) {
-              console.log(data);
+              $scope.showSimpleToast('Recipe Successfully Created');
             });
 
         },

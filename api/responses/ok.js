@@ -11,7 +11,7 @@
  *          - pass string to render specified view
  */
 
-module.exports = function sendOK (results, options) {
+module.exports = function sendOK(results, options) {
 
   // Get access to `req`, `res`, & `sails`
   var req = this.req;
@@ -20,17 +20,16 @@ module.exports = function sendOK (results, options) {
 
   var from = req.param.from;
   var to = req.param.to;
-  var count = results.length;
-
-  if( !count ){
-    count = 1;
+  var count = 0;
+  if (results) {
+    var count = results.length;
   }
 
-  if( !from ){
+  if (!from) {
     from = 0;
   }
-  if( !to ){
-    to =  from + count;
+  if (!to) {
+    to = from + count;
   }
 
   var data = {
@@ -51,15 +50,18 @@ module.exports = function sendOK (results, options) {
 
   // If second argument is a string, we take that to mean it refers to a view.
   // If it was omitted, use an empty object (`{}`)
-  options = (typeof options === 'string') ? { view: options } : options || {};
+  options = (typeof options === 'string') ? {
+    view: options
+  } : options || {};
 
   // Attempt to prettify data for views, if it's a non-error object
   var viewData = data;
   if (!(viewData instanceof Error) && 'object' == typeof viewData) {
     try {
-      viewData = require('util').inspect(data, {depth: null});
-    }
-    catch(e) {
+      viewData = require('util').inspect(data, {
+        depth: null
+      });
+    } catch (e) {
       viewData = undefined;
     }
   }
@@ -68,12 +70,18 @@ module.exports = function sendOK (results, options) {
   // Otherwise try to guess an appropriate view, or if that doesn't
   // work, just send JSON.
   if (options.view) {
-    return res.view(options.view, { data: viewData, title: 'OK' });
+    return res.view(options.view, {
+      data: viewData,
+      title: 'OK'
+    });
   }
 
   // If no second argument provided, try to serve the implied view,
   // but fall back to sending JSON(P) if no view can be inferred.
-  else return res.guessView({ data: viewData, title: 'OK' }, function couldNotGuessView () {
+  else return res.guessView({
+    data: viewData,
+    title: 'OK'
+  }, function couldNotGuessView() {
     return res.jsonx(data);
   });
 

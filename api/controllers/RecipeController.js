@@ -31,9 +31,7 @@ module.exports = {
 
   getOne: function(req, res) {
 
-    Recipe.find({
-      id: req.param('id')
-    }).exec(function(err, recipe) {
+    Recipe.findOne( req.param('id') ).exec(function(err, recipe) {
       if (err) {
         return res.negotiate(err);
       }
@@ -53,18 +51,16 @@ module.exports = {
 
   destroy: function(req, res) {
 
-    Recipe.destroy({}).exec(function(err, recipe) {
+    Recipe.destroy( req.param('id') ).exec(function(err, recipe) {
       if (err) {
         return res.negotiate(err);
       }
-      return res.ok();
+      return res.ok( recipe );
     });
   },
 
   update: function(req, res) {
-    Recipe.update({
-      id: req.param('id')
-    }).exec(function(err, recipe) {
+    Recipe.update( req.param('id') ).exec(function(err, recipe) {
       if (err) {
         return res.negotiate(err);
       }

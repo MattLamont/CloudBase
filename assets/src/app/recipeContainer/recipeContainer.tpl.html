@@ -1,16 +1,13 @@
 <div ng-controller="RecipeContainerCtrl">
   <md-content layout="row" flex layout-align="center space-around" layout-wrap>
     <md-card md-whiteframe="8" ng-repeat="recipe in recipes">
-      <img ng-src="{{recipe.images[0] || 'http://placehold.it/500x500'}}" class="md-card-image center-cropped" alt="Washed Out">
+      <img ng-src="{{recipe.images[0] || 'http://placehold.it/500x500'}}" class="md-card-image center-cropped scrim" alt="Washed Out">
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">{{recipe.name}}</span>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <p>
-          {{recipe.description}}
-        </p>
         <p>
           {{recipe.category}}
         </p>
