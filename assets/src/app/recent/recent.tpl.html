@@ -1,8 +1,7 @@
 <div ng-controller="RecentCtrl">
   <div style="height:30px"></div>
-  <div ng-repeat="recipe in recipes">
-    <a href="/recipe/{{recipe.id}}">{{recipe.name}}</a>
-  </div>
 
-  <div ng-include="'recipeContainer/recipeContainer.tpl.html'"></div>
+  <md-content>
+    <recipe-container url="/api/recipes/recent"></recipe-container>
+  </md-content>
 </div>

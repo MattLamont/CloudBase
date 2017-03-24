@@ -60,7 +60,9 @@ module.exports = {
   },
 
   update: function(req, res) {
-    Recipe.update( req.param('id') ).exec(function(err, recipe) {
+
+    Recipe.update( req.param('id') , req.body ).exec(function(err, recipe) {
+
       if (err) {
         return res.negotiate(err);
       }

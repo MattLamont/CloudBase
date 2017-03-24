@@ -2,7 +2,6 @@ angular.module('sailng', [
     'ui.router',
     'sails.io',
     'angularMoment',
-    'lodash',
     'angularMoment',
     'templates-app',
     'services',
@@ -11,13 +10,14 @@ angular.module('sailng', [
     'ngMessages',
     'ngFileUpload',
 
+    'sailng.recipeContainer',
     'sailng.header',
     'sailng.home',
     'sailng.about',
     'sailng.recent',
+    'sailng.popular',
     'sailng.creation',
-    'sailng.recipe',
-    'sailng.recipeContainer'
+    'sailng.recipe'
   ])
 
   .config(function myAppConfig($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {

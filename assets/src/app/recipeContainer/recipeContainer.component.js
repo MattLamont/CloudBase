@@ -1,26 +1,52 @@
-angular.module('sailng.recipeContainer', ['ngMaterial'])
+angular.module('sailng.recipeContainer', ['ngMaterial']).component('recipeContainer', {
+    templateUrl: 'src/app/recipeContainer/recipeContainer.tpl.html',
+    controllerAs: "model",
+    bindings: {
+      url: '@'
+    }
+  })
 
   .controller('RecipeContainerCtrl', function RecipeContainerController($scope, $state, config, $http, $mdDialog) {
 
     $scope.currentUser = config.currentUser;
 
-    $scope.recipe_display = false;
-    $scope.displayedRecipe = {};
+    $scope.url = $scope.model.url;
 
-    $http.get('/api/recipes/recent').then(function(res) {
+    $http.get($scope.url).then(function(res) {
       $scope.recipes = res.data.results;
     });
 
-    $scope.onCardClick = function(index) {
-      $scope.displayedRecipe = $scope.recipes[index];
-      $scope.recipe_display = true;
+    $scope.likeRecipe = function(index, recipe) {
+      var url = '/api/recipe/' + recipe.id;
+      var likes = recipe.likes + 1;
+      var body = '{"likes":' + likes + '}';
+      $http.put(url, body).then(function(res) {
+        $scope.recipes[index].likes = res.data.results[0].likes;
+      });
     };
 
-    $scope.closeRecipeDisplay = function() {
-      $scope.recipe_display = false;
+    $scope.dislikeRecipe = function(index, recipe) {
+      var url = '/api/recipe/' + recipe.id;
+      var dislikes = recipe.dislikes + 1;
+      var body = '{"dislikes":' + dislikes + '}';
+      $http.put(url, body).then(function(res) {
+        $scope.recipes[index].dislikes = res.data.results[0].dislikes;
+      });
     };
+
+    $scope.increaseRecipeViews = function(recipe) {
+      var url = '/api/recipe/' + recipe.id;
+      var views = recipe.views + 1;
+      var body = '{"views":' + views + '}';
+      $http.put(url, body).then(function(res) {
+          
+      });
+    };
+
 
     $scope.showRecipeDialog = function(ev, selected_recipe) {
+      $scope.increaseRecipeViews(selected_recipe);
+
       $mdDialog.show({
           locals: {
             recipe: selected_recipe

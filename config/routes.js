@@ -53,19 +53,12 @@ module.exports.routes = {
   'post /api/user': 'UserController.create',
 
 
-  /* Popular routes */
-  'get /popular': 'PopularController.getAll',
-  'get /popular': 'PopularController.getOne',
-  'post /popular': 'PopularController.create',
-  'delete /popular': 'PopularController.destroy',
-  'put /popular/:id': 'PopularController.update',
-
   /* Recipe Routes */
   'get /api/recipes/recent': 'RecipeController.getRecent',
   'get /api/recipes/popular': 'RecipeController.getPopular',
   'get /api/recipes': 'RecipeController.getAll',
   'get /api/recipe/:id': 'RecipeController.getOne',
-  'post /api/recipe': 'RecipeController.create',
+  'post /api/recipe/': 'RecipeController.create',
   'delete /api/recipe/:id': 'RecipeController.destroy',
   'put /api/recipe/:id': 'RecipeController.update',
   'get /api/recipe/search': 'RecipeController.search',
