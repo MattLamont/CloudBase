@@ -200,15 +200,11 @@
                   </div>
                   <md-item-template>
                     <span class="item-title">
-                          <md-icon md-svg-icon="../../images/icons/ic_menu_white_48px.svg"></md-icon>
-                          <span><strong>Flavor</strong> {{item.name}}</span>
+                          <span><strong>{{item.name}}</strong> </span>
                     </span>
                     <span class="item-metadata">
                           <span>
-                              <strong>Brand:</strong> {{item.brand}}
-                          </span>
-                    <span>
-                              <strong>Company:</strong> {{item.name}}
+                              <strong>{{item.brand}}</strong> 
                           </span>
                     </span>
                   </md-item-template>
@@ -280,7 +276,7 @@
 
               <md-input-container class="md-block">
                 <label>Description</label>
-                <textarea required ng-model="newFlavor.description" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+                <textarea required ng-model="newFlavor.description" md-maxlength="1000" rows="5" md-select-on-focus></textarea>
               </md-input-container>
 
               <br>
@@ -340,9 +336,9 @@
         </tr>
       </table>
   -->
+      <md-button class="md-raised md-primary" ng-click="createRecipe()">Submit</md-button>
     </md-content>
 
-    <md-button class="md-raised md-primary" ng-click="createRecipe()">Submit</md-button>
     <div flex-xs="0" flex-gt-sm="25">
     </div>
   </div>

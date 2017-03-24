@@ -61,21 +61,23 @@ module.exports.routes = {
   'put /popular/:id': 'PopularController.update',
 
   /* Recipe Routes */
+  'get /api/recipes/recent': 'RecipeController.getRecent',
+  'get /api/recipes/popular': 'RecipeController.getPopular',
   'get /api/recipes': 'RecipeController.getAll',
   'get /api/recipe/:id': 'RecipeController.getOne',
   'post /api/recipe': 'RecipeController.create',
-  'delete /api/recipe': 'RecipeController.destroy',
+  'delete /api/recipe/:id': 'RecipeController.destroy',
   'put /api/recipe/:id': 'RecipeController.update',
   'get /api/recipe/search': 'RecipeController.search',
   'post /api/recipe/image': 'RecipeController.createImage',
 
   /* Flavor Routes */
+  'get /api/flavor/search': 'FlavorController.search',
   'get /api/flavors': 'FlavorController.getAll',
   'get /api/flavor/:id': 'FlavorController.getOne',
   'post /api/flavor': 'FlavorController.create',
   'delete /api/flavor': 'FlavorController.destroy',
   'put /api/flavor/:id': 'FlavorController.update',
-  'get /api/flavor/search': 'FlavorController.search',
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options

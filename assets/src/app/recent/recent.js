@@ -14,8 +14,9 @@ angular.module('sailng.recent', [])
 
   .controller('RecentCtrl', function RecentController($scope, $sailsSocket, config, titleService, RecipeModel) {
     titleService.setTitle('Home');
+    $scope.recipes = [];/*
     RecipeModel.getAll().then(function(model) {
       console.log(model);
       $scope.recipes = model.results;
-    });
+  });*/
   });

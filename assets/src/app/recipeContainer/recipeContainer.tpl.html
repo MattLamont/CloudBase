@@ -1,0 +1,66 @@
+<div ng-controller="RecipeContainerCtrl">
+
+
+  <md-content layout="row" flex layout-align="space-around center" layout-wrap>
+
+    <md-card md-whiteframe="8" ng-repeat="recipe in recipes" ng-click="showRecipeDialog($event , recipe)">
+      <img ng-src="{{recipe.images[0] || 'http://placehold.it/500x500'}}" class="md-card-image center-cropped" alt="Washed Out">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{recipe.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <!--
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button>Action 1</md-button>
+        <md-button>Action 2</md-button>
+      </md-card-actions>
+  -->
+    </md-card>
+  </md-content>
+
+  <!--
+  <section flex="50" md-whiteframe="8" ng-show="recipe_display" class="recipe-display-container">
+    <img ng-src="{{displayedRecipe.images[0]}}" class="recipe-display-img">
+
+    <div layout="row">
+      <div flex="50" ng-style="{'background-image': 'url(' + displayedRecipe.images[0] + ')'}">
+        <img ng-src="{{displayedRecipe.images[0]}}" class="recipe-display-img">
+    </div>
+
+      <div flex="50" class="primary-element">
+        <div layout="row" layout-align="end center">
+          <md-button class="md-icon-button" ng-click="closeRecipeDisplay()">
+            <md-icon md-font-library="material-icons md-48">close
+              <md-icon>
+          </md-button>
+        </div>
+        <p class="md-headline">{{displayedRecipe.name}}</p>
+        <p> {{displayedRecipe.author}}</p>
+      </div>
+  </div>
+
+    <div layout-padding class="recipe-display-title">
+      <header class="md-display-1">{{displayedRecipe.name}}</header>
+      <header class="md-title">{{displayedRecipe.author}}</header>
+    </div>
+
+    <md-content layout-padding class="foreground-element">
+      <strong class="md-title">Category: </strong>
+      <p>{{displayedRecipe.category}}</p>
+      <strong class="md-title">Description: </strong>
+      <p>{{displayedRecipe.description}}</p>
+      <strong class="md-title">Flavors</strong>
+      <ul>
+        <li ng-repeat="flavor in displayedRecipe.flavors" class="md-subhead">{{flavor.name}}</li>
+      </ul>
+
+      <md-chips ng-model="displayedRecipe.tags" readonly="true" md-removable="false" md-max-chips="100">
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+    </md-content>
+</section>-->
+
+</div>
