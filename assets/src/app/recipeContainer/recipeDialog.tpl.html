@@ -1,0 +1,38 @@
+<md-dialog class="recipe-dialog">
+  <form ng-cloak>
+
+    <img ng-src="{{recipe.images[0]}}" class="recipe-display-img">
+
+    <div layout-padding class="recipe-display-title">
+      <header class="md-display-1">{{recipe.name}}</header>
+      <header class="md-title">{{recipe.author}}</header>
+    </div>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+
+        <strong class="md-title">Category: </strong>
+        <p>{{recipe.category}}</p>
+        <strong class="md-title">Description: </strong>
+        <p>{{recipe.description}}</p>
+        <strong class="md-title">Flavors</strong>
+        <ul>
+          <li ng-repeat="flavor in recipe.flavors" class="md-subhead">{{flavor.name}}</li>
+        </ul>
+
+        <md-chips ng-model="recipe.tags" readonly="true" md-removable="false" md-max-chips="100">
+          <md-chip-template>
+            <strong>{{$chip}}</strong>
+          </md-chip-template>
+        </md-chips>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" class="primary-element">
+      <span flex></span>
+      <md-button ng-click="cancel()">
+        close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
