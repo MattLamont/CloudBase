@@ -99,6 +99,16 @@ module.exports = {
       defaultsTo: 0
     },
 
+    likedBy:{
+        collection: 'user',
+        via: 'likedRecipes'
+    },
+
+    savedBy:{
+        collection: 'user',
+        via: 'savedRecipes'
+    },
+
     dislikes: {
       type: 'integer',
       defaultsTo: 0
