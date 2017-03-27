@@ -19,6 +19,7 @@ angular.module('sailng.account', ['ngFileUpload'])
 
     $http.get(url).then(function(res) {
       $scope.user = res.data.results;
+
     });
 
     $scope.onAccept = function() {
@@ -33,43 +34,25 @@ angular.module('sailng.account', ['ngFileUpload'])
           $http
             .put( url , $scope.user)
             .then(function(data) {
-              $scope.showSimpleToast('User Image Successfully Changed');
+
+              $mdToast.show(
+                $mdToast.simple()
+                .textContent('User Image Successfully Changed')
+                .position('top right')
+                .hideDelay(10000)
+              );
             });
         },
         function(resp) {
-          $scope.showSimpleToast('Unable to save recipe image. Please try again.');
+
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('Unable to save user image. Please try again.')
+            .position('top right')
+            .hideDelay(10000)
+          );
           console.log('Error status: ' + resp.status);
         });
     };
-
-    var last = {
-      bottom: false,
-      top: true,
-      left: false,
-      right: true
-    };
-
-    $scope.toastPosition = angular.extend({}, last);
-
-    $scope.getToastPosition = function() {
-      return Object.keys($scope.toastPosition)
-        .filter(function(pos) {
-          return $scope.toastPosition[pos];
-        })
-        .join(' ');
-    };
-
-    $scope.showSimpleToast = function(message) {
-      var pinTo = $scope.getToastPosition();
-
-      $mdToast.show(
-        $mdToast.simple()
-        .textContent(message)
-        .position(pinTo)
-        .hideDelay(10000)
-      );
-    };
-
-
 
   });
