@@ -1,0 +1,51 @@
+<div ng-controller="AccountCtrl" layout="column" layout-align="center center">
+  <div style="height:30px"></div>
+  <img ng-src="{{user.image}}">
+  <div class="upload-button md-button md-primary md-raised" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">
+    Change Profile Picture
+  </div>
+  <br>
+  <md-button class="md-raised md-primary" ng-click="onAccept()">Accept</md-button>
+  <img ngf-src="file">
+  <p class="md-title">{{user.username}}</p>
+  <p class="md-title">{{user.email}}</p>
+
+  <br>
+  <header class="md-header">Created Recipes</header>
+  <div layout="row" layout-wrap layout-align="center center">
+    <md-card md-whiteframe="8" ng-repeat="recipe in user.createdRecipes" ng-click="showRecipeDialog($event , recipe)">
+      <img ng-src="{{recipe.images[0] || 'http://placehold.it/500x500'}}" class="md-card-image center-cropped" alt="Washed Out">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{recipe.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+    </md-card>
+  </div>
+
+  <br>
+  <header class="md-header">Saved Recipes</header>
+  <div layout="row" layout-wrap layout-align="center center">
+    <md-card md-whiteframe="8" ng-repeat="recipe in user.savedRecipes" ng-click="showRecipeDialog($event , recipe)">
+      <img ng-src="{{recipe.images[0] || 'http://placehold.it/500x500'}}" class="md-card-image center-cropped" alt="Washed Out">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{recipe.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+    </md-card>
+  </div>
+
+  <br>
+  <header class="md-header">Liked Recipes</header>
+  <div layout="row" layout-wrap layout-align="center center">
+    <md-card md-whiteframe="8" ng-repeat="recipe in user.likedRecipes" ng-click="showRecipeDialog($event , recipe)">
+      <img ng-src="{{recipe.images[0] || 'http://placehold.it/500x500'}}" class="md-card-image center-cropped" alt="Washed Out">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{recipe.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+    </md-card>
+  </div>
+</div>
