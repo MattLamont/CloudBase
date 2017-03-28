@@ -5,7 +5,10 @@
 
     <div layout-padding class="recipe-display-title">
       <header class="md-display-1">{{recipe.name}}</header>
-      <header class="md-title">{{recipe.author}}</header>
+      <div layout="row" layout-padding layout-align="center center">
+        <img ng-src="{{recipe.author[0].image}}" class="user-image-circle" />
+        <span class="md-title">{{recipe.author[0].username}}</span>
+      </div>
     </div>
 
     <md-dialog-content>

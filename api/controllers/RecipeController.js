@@ -19,7 +19,9 @@ module.exports = {
     Recipe.find({
       skip: req.query.from,
       limit: req.query.to - req.query.from
-    }).exec(function(err, recipe) {
+    })
+    .populateAll()
+    .exec(function(err, recipe) {
 
       if (err) {
         return res.negotiate(err);
@@ -31,7 +33,11 @@ module.exports = {
 
   getOne: function(req, res) {
 
-    Recipe.findOne( req.param('id') ).exec(function(err, recipe) {
+    Recipe.findOne( req.param('id') )
+    .populateAll()
+    //.populate('author')
+    //.populate('flavors')
+    .exec(function(err, recipe) {
       if (err) {
         return res.negotiate(err);
       }
@@ -41,7 +47,9 @@ module.exports = {
 
   create: function(req, res) {
 
-    Recipe.create(req.body).exec(function(err, recipe) {
+    Recipe.create(req.body)
+    .populateAll()
+    .exec(function(err, recipe) {
       if (err) {
         return res.negotiate(err);
       }
@@ -61,7 +69,9 @@ module.exports = {
 
   update: function(req, res) {
 
-    Recipe.update( req.param('id') , req.body ).exec(function(err, recipe) {
+    Recipe.update( req.param('id') , req.body )
+    .populateAll()
+    .exec(function(err, recipe) {
 
       if (err) {
         return res.negotiate(err);
@@ -75,7 +85,9 @@ module.exports = {
       name: {
         contains: req.query.q
       }
-    }).exec(function(err, recipe) {
+    })
+    .populateAll()
+    .exec(function(err, recipe) {
       if (err) {
         return res.negotiate(err);
       }
@@ -107,6 +119,7 @@ module.exports = {
     Recipe.find({
         limit: 200
       })
+      .populateAll()
       .sort('createdAt DESC')
       .exec(function(err, recipes) {
 
@@ -122,6 +135,7 @@ module.exports = {
     Recipe.find({
         limit: 200
       })
+      .populateAll()
       .sort('views DESC')
       .exec(function(err, recipes) {
 

@@ -39,7 +39,7 @@ angular.module('sailng.recipeContainer', ['ngMaterial']).component('recipeContai
       var views = recipe.views + 1;
       var body = '{"views":' + views + '}';
       $http.put(url, body).then(function(res) {
-          
+
       });
     };
 

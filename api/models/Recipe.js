@@ -40,8 +40,10 @@ module.exports = {
     },
 
     author: {
-      type: 'json',
-      required: true
+      //type: 'json',
+      //required: true
+      collection: 'user',
+      via: 'id'
     },
 
     images: {
@@ -80,8 +82,10 @@ module.exports = {
     },
 
     flavors: {
-      type: 'json',
-      required: true
+        collection: 'flavor',
+        via: 'id'
+      //type: 'json',
+      //required: true
     },
 
     additionalInfo: {
